@@ -1,0 +1,48 @@
+# Options -Indexes +ExecCGI
+AddHandler cgi-script .cgi .pl
+
+# DirectoryIndex accueil.php /erreurs/403.php
+Options +FollowSymlinks
+Options -MultiViews
+AcceptPathInfo off
+
+RewriteEngine on
+
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP_HOST} !^local
+RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+#RewriteCond %{REMOTE_ADDR} !^87\.65\.249\.46
+#RewriteCond %{REQUEST_FILENAME} !/maintenance
+#RewriteCond %{REQUEST_URI} !\.(css|jpg)$
+#RewriteRule ^.*$	/maintenance [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^rbp.
+RewriteRule ^(.*)$   http://www.rbp.be/$1 [L]
+
+RewriteRule ^(.*)/(natation|waterpolo|plongeon|comite)$ $1.php?section=$2 [L]
+RewriteRule ^(.*)/(natation|waterpolo|plongeon|comite)/page-([0-9]+)$ $1.php?section=$2&page=$3 [L]
+RewriteRule ^(photo|photo_manage)/(natation|waterpolo|plongeon|comite)/([a-z0-9\-]+)$ $1.php?section=$2&album=$3 [L]
+RewriteRule ^accueil/(new_mdp)/([0-9]+)-([a-z0-9]+)$ accueil.php?action=$1&id_user=$2&cle=$3 [L]
+
+RewriteRule ^t-([a-z_]+)/([a-z_]+)-([a-z0-9_@.]+)/([a-z_]+)-([a-z0-9_@.]+)$ /tools/$1.php?$2=$3&$4=$5 [L]
+RewriteRule ^t-([a-z_]+)/([a-z_]+)-([a-z0-9_@.]+)$ /tools/$1.php?$2=$3 [L]
+RewriteRule ^t-([a-zA-Z_]+)$ /tools/$1.php [L]
+RewriteRule ^i-([a-z0-9_.]+)$ /includes/$1.php [L]
+RewriteRule ^f-([a-zA-Z0-9_.]+)$ /includes/form/$1_form.php [L]
+
+RewriteRule ^competition/([a-z0-9_.]+)$ documents/competition/$1 [L]
+RewriteRule ^news/([a-z0-9_.]+)$ /images/news/$1 [L]
+RewriteRule ^portrait/([a-z0-9_.]+)$ /images/portrait/$1 [L]
+RewriteRule ^photo/([a-z0-9_.]+)$ /images/photo/$1 [L]
+RewriteRule ^logo/([a-z0-9_.]+)$ /images/logo/$1 [L]
+RewriteRule ^fonts/([a-z0-9_.\-]+)$ /asset/fonts/$1 [L]
+RewriteRule ^img/([a-z0-9_.]+)$ /asset/img/$1 [L]
+RewriteRule ^fiche/([a-z_]+)$ /tools/$1_getFiche.php [L]
+RewriteRule ^([a-zA-Z0-9_.\-]+)\.(js|css)$ /asset/$2/$1.$2 [L]
+
+RewriteRule ^([a-z_]+)/([a-z_]+)-([0-9]+)/([a-z_]+)-([0-9]+) $1.php?$2=$3&$4=$5 [L]
+RewriteRule ^([a-z_]+)/([a-z_]+)-([0-9]+)$ $1.php?$2=$3 [L]
+RewriteRule ^([a-z_]+)$ $1.php [L]
+
+RewriteRule	^$	/accueil [R=301,L]

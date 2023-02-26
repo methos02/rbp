@@ -1,0 +1,17 @@
+form[name=form-membre] {
+  .row-flex {justify-content: center;}
+
+  input[name=membre] {min-width: 250px;}
+  input[type=checkbox] {
+    line-height: 44px;
+    width: 100px
+  }
+}
+
+.span-submit {min-width: 250px}
+.th-nom {min-width: 250px;}
+.th-checkbox {width: 100px}
+.td-supp {
+  text-align: center;
+  width:110px;
+}

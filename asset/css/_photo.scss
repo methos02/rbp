@@ -1,0 +1,98 @@
+.ul-album {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+}
+
+.li-album {
+  display: flex;
+  align-items: center;
+  width: 250px;
+  list-style-type: none;
+  padding: 10px;
+}
+
+.li-album:hover{
+  background-color: #ececec;
+  cursor: pointer;
+}
+
+.a-album {
+  color: #545454;
+  position: absolute;
+  bottom: 0;
+  right: -1px;
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 15px;
+  font-weight: 700;
+  border-radius: 15px 0 0 0;
+  background-color: white;
+  text-decoration: none;
+}
+
+.a-album:hover {
+  color: #545454;
+  text-decoration: none;
+}
+
+.album-name {
+  flex:1;
+  font-size: 18px;
+}
+
+.border-album {
+  border-right: 1px solid #e7e7e7;
+  border-bottom: 1px solid #e7e7e7;
+  cursor: pointer;
+}
+
+.contenu-photo .row:first-child {
+  border-top: 1px solid #e7e7e7;
+}
+
+.contenu-photo .row .border-album:first-child {
+  border-left: 1px solid #e7e7e7;
+}
+
+.limite-album {
+  margin: 4px;
+  height: 200px;
+  overflow: hidden;
+}
+
+.div-album {
+  background-size: cover !important;
+  background-position: center !important;
+  height: 200px;
+}
+
+.div-album:hover {
+  transform: scale(1.1);
+  transition: all .5s;
+}
+
+/* ------------ */
+/*   DROPZONE   */
+/* ------------ */
+.dz-error-mark, .dz-success-mark{
+  top: 20px !important;
+  left: -10px !important;
+  margin-left: 0 !important;
+}
+
+.dz-preview .dz-success-mark {transition: opacity linear 0.3s;}
+
+.dz-upload-complete .dz-success-mark {
+  opacity: 1 !important;
+  animation: slide-in 3s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* -------------- */
+/*   FORM ALBUM   */
+/* -------------- */
+.form-album {
+  display: flex;
+  flex-direction: column;
+}
