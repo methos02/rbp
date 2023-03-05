@@ -32,7 +32,7 @@ if((!defined('script_name') ||  !str_contains(script_name, 'command'))  && !isse
 $params = [];
 
 if(!defined('script_name') || !str_contains(script_name, 'command')) {
-    $params['log'] = Droit::factory()->getLog();
+    Droit::factory()->getLog();
 }
 
 $params['meta'] = [];
