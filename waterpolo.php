@@ -1,11 +1,14 @@
-<?php include __DIR__.'/includes/init.php';
+<?php
+use App\Core\Core_rbp;
+
+$params = include __DIR__.'/includes/init.php';
 $meta['nom'] = 'Royal Brussels Poseidon - Water-polo';
 
 $articleFactory = Article::factory();
 $sectionFactory = Section::factory();
 $sponsorFactory = Sponsor::factory();
 $saisonFactory = Saison::factory();
-$matchFactory = Match::factory();
+$matchFactory = MatchM::factory();
 $formFactory = Form::factoryForm();
 
 $articles = $articleFactory->getArticlesBySection(Section::WATERPOLO['id']);
@@ -24,10 +27,10 @@ $dirigeant =  $sectionFactory -> orderDirigeant($ids_dirigeant, $ids_membres);
 $id_saison = Saison::factory()->getLastSaisonPolo();
 $id_currentSaison = Saison::factory()->saisonActive(false);
 
-// Récupération des match
-$btn_categorie = $btn_categorie = Core_rbp::getCategorieBtn($id_saison, Match::DEFAULT_TEAM);
+// Récupération du match
+$btn_categorie = $btn_categorie = Core_rbp::getCategorieBtn($id_saison, MatchM::DEFAULT_TEAM);
 
-$matchs = $matchFactory -> getCalendrier($id_saison,Match::DEFAULT_TEAM);
+$matchs = $matchFactory -> getCalendrier($id_saison, MatchM::DEFAULT_TEAM);
 $matchs = $matchFactory->setsParams($matchs, $id_currentSaison);
 
 $saisons = $saisonFactory->getSaisonsByPoloCategorie();
@@ -50,7 +53,7 @@ $arrSaiIdToSaison = $saisonFactory->idToSaison($saisons);
         </div>
         <!-- Waterpolo -->
         <div class="parallax-cont" id="polo" style="background-image: url('/images/waterpolo1.jpg');">
-            <?php if ($log['droit'] >= Droit::REDAC) : ?>
+            <?php if ($params['log']['droit'] >= Droit::REDAC) : ?>
                 <a href="" class="btn btn-primary btn-modif-right hidden-xs" data-modif="article"> Modifier "Water-polo" </a>
             <?php endif; ?>
             <div class="side pos-center pos-left" data-title="polo">
@@ -75,7 +78,7 @@ $arrSaiIdToSaison = $saisonFactory->idToSaison($saisons);
         </div>
         <!-- Senior -->
         <div class="parallax-cont" id="adulte" style="background-image: url('/images/equipe1.jpg');">
-            <?php if ($log['droit'] >= Droit::REDAC) : ?>
+            <?php if ($params['log']['droit'] >= Droit::REDAC) : ?>
                 <a href="" class="btn btn-primary btn-modif-left hidden-xs" data-modif="article"> Modifier "Section Adulte" </a>
             <?php endif; ?>
             <div class="col-md-8 col-md-offset-2 article pos-left" data-article="adulte">
@@ -96,7 +99,7 @@ $arrSaiIdToSaison = $saisonFactory->idToSaison($saisons);
         </div>
         <!-- Jeune -->
         <div class="parallax-cont" id="jeune" style="background-image: url('/images/groupe_jeune.jpg');">
-            <?php if ($log['droit'] >= Droit::REDAC) : ?>
+            <?php if ($params['log']['droit'] >= Droit::REDAC) : ?>
                 <a href="" class="btn btn-primary btn-modif-right hidden-xs" data-modif="article"> Modifier "Section Jeune" </a>
             <?php endif; ?>
             <div class="side pos-center pos-left" data-title="jeune">

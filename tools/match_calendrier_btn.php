@@ -1,6 +1,10 @@
-<?php include __DIR__.'/../includes/init.php';
+<?php
+
+use App\Core\Core_rbp;
+
+include __DIR__.'/../includes/init.php';
 $id_saison = Saison::factory()->saisonActive(false);
-$matchFactory = Match::factory();
+$matchFactory = MatchM::factory();
 $result['message'] = "";
 
 if (!isset($_POST['id_saison']) || !is_numeric($_POST['id_saison'])) {

@@ -2,7 +2,7 @@
 $newsFactory = News::factory();
 $mailFactory = Mail::factory();
 $competitionFactory = Competition::factory();
-$matchFactory = Match::factory();
+$matchFactory = MatchM::factory();
 
 if(!isset($_GET['cle']) || $_GET['cle'] != News::CLE_CRON) {
     exit();

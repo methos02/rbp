@@ -27,8 +27,13 @@ if( !str_contains(script_name, 'command')  && !isset($_SESSION['already_visited'
     $_SESSION['already_visited'] = true;
     Core_rbp::visiteur();
 }
+
+$params = [];
+
 if( !str_contains(script_name, 'command')) {
-    $log = Droit::factory()->getLog();
+    $params['log'] = Droit::factory()->getLog();
 }
 
-$meta = [];
+$params['meta'] = [];
+
+return $params;

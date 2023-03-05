@@ -1,5 +1,9 @@
-<?php include __DIR__ . '/../includes/init.php';
-$matchFactory = Match::factory();
+<?php
+
+use App\Core\Core_rbp;
+
+include __DIR__ . '/../includes/init.php';
+$matchFactory = MatchM::factory();
 $piscineFactory = Piscine::factory();
 $resultat['message'] = "";
 
