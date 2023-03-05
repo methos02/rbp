@@ -14,3 +14,10 @@ foreach (scandir(database_path('bases')) as $migration) {
     $pdo->exec(include database_path('bases/'.$migration));
     echo "$migration migrée ... \n";
 }
+
+echo "... migration terminée. \n Début des seeders ... \n";
+foreach (include database_path('seeders/seeder.php') as $seeder) {
+    include database_path("seeders/{$seeder}_seeder.php");
+    echo "Seeder $seeder terminé ... \n";
+}
+echo "... seeders terminés. \n";

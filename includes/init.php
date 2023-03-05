@@ -15,6 +15,7 @@ mb_internal_encoding('UTF-8');
 @session_start();
 
 include dirname(__DIR__ ).'/app/helpers/path_helpers.php';
+include dirname(__DIR__ ).'/app/helpers/debug_helpers.php';
 
 include dirname(__DIR__ ).'/vendor/autoload.php';
 

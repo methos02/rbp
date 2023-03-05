@@ -1,14 +1,20 @@
 <?php
+use App\Models\Model;
 
-use App\Core\Connection;
+class News extends Model {
+    protected string $table = "t_news";
+    private string $news_titre;
+    private string $news_news;
+    private string $news_photo;
+    private string $news_nom_posteur;
+    private string $news_date_p;
+    private int $news_ID_section;
 
-class News extends Table {
     CONST PATH_IMG_REAL = '/images/news/';
     CONST PATH_IMG_NEWS = '/news/';
     CONST EXT_NEWS = ['jpeg', 'jpg'];
     CONST SIZE_NEWS = '40048000';
     CONST CLE_CRON = 'GnQzGnYObqjvsNU6dMEM';
-
     CONST IMG_DEFAULT_COMITE = 'news_'.Section::COMITE['id'].'.jpg';
     CONST IMG_DEFAULT_NAT = 'news_'.Section::NATATION['id'].'.jpg';
     CONST IMG_DEFAULT_WP = 'news_'.Section::WATERPOLO['id'].'.jpg';
@@ -18,10 +24,6 @@ class News extends Table {
     CONST MAIL_SUPP = 1;
 
     CONST NUMBER_NEWS = 6;
-
-    public static function factory():self {
-        return new News(Connection::getInstance());
-    }
 
     public function addNews($titre, $news, $photo, $id_section, $posteur) {
         $this -> bdd -> req('INSERT INTO t_news (news_titre, news_news, news_photo, news_nom_posteur, news_date_p, news_ID_section) VALUES (:titre, :news, :photo, :nom_posteur, NOW(), :id_section)', array('titre' => $titre, 'news' => $news, 'photo' => $photo, 'nom_posteur' => $posteur, 'id_section' => $id_section));

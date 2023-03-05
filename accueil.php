@@ -1,17 +1,10 @@
 <?php
 
-use App\Core\Core_rbp;
-
 include __DIR__.'/includes/init.php';
 $meta['nom'] = 'Royal Brussels Poseidon - Accueil';
+
 $newsFactory = News::factory();
-
 $newsArray = $newsFactory->getNewsAccueil();
-
-if(!isset($_SESSION['already_visited']) && !in_array($_SERVER['REMOTE_ADDR'], array('81.240.125.88'))){
-    $_SESSION['already_visited'] = true;
-    Core_rbp::visiteur();
-}
 
 ?>
 <!DOCTYPE html>

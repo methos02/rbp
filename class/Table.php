@@ -6,7 +6,7 @@ class Table {
     protected Connection $bdd;
 
     public function __construct(Connection $bdd) {
-        $this -> bdd = $bdd;
+        $this->bdd = $bdd;
     }
 
     //Déplacer des documents
