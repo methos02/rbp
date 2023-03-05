@@ -2,7 +2,7 @@
 
 return
     'CREATE TABLE `t_competition` (
-      `com _id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      `com_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
       `com_nom` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
       `com_id_saison` int(5) NOT NULL,
       `com_id_section` int(2) NOT NULL,

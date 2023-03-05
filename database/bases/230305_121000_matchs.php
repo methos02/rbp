@@ -2,7 +2,7 @@
 
 return
     'CREATE TABLE `t_match` (
-      `mac _id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      `mac_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
       `mac_id_wpo` int(11) DEFAULT NULL,
       `mac_numb` int(11) NOT NULL,
       `mac_coupe` tinyint(1) NOT NULL DEFAULT 0,

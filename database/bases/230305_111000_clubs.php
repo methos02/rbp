@@ -2,7 +2,7 @@
 
 return
     'CREATE TABLE `t_club` (
-      `club _id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      `club_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
       `club_nom` varchar(255) NOT NULL,
       `club_initiale` varchar(5) NOT NULL,
       `club_nom_modif` varchar(255) DEFAULT NULL,

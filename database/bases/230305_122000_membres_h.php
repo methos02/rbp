@@ -2,7 +2,7 @@
 
 return
     'CREATE TABLE `t_membre_h` (
-      `mem _id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      `mem_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
       `mem_nom` varchar(50) NOT NULL,
       `mem_prenom` varchar(50) NOT NULL,
       `mem_id_civilite` int(11) NOT NULL,

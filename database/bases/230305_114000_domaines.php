@@ -2,7 +2,7 @@
 
 return
     'CREATE TABLE `t_domaine` (
-      `dom _id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      `dom_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
       `dom_nom` varchar(250) NOT NULL,
       `dom_nom_modif` varchar(250) NOT NULL,
       `dom_date_modif` date NOT NULL,

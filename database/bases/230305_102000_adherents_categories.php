@@ -2,7 +2,7 @@
 
 return
     'CREATE TABLE `t_adherent_categorie` (
-      `adc _id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      `adc_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
       `adc_id_update` varchar(30) NOT NULL,
       `adc_id_adh_saison` int(11) NOT NULL,
       `adc_id_fonction` int(11) NOT NULL,

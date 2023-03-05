@@ -2,7 +2,7 @@
 
 return
     'CREATE TABLE `t_album` (
-      `alb _id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      `alb_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
       `alb_nom` varchar(255) NOT NULL,
       `alb_slug` varchar(255) NOT NULL,
       `alb_cover` varchar(255) DEFAULT NULL,

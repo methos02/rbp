@@ -2,7 +2,7 @@
 
 return
     'CREATE TABLE `t_saison` (
-      `sai _id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      `sai_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
       `sai_saison` varchar(20) NOT NULL,
       `sai_active` tinyint(1) NOT NULL DEFAULT 0,
       `sai_supplogiq` tinyint(1) DEFAULT 0,

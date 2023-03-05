@@ -2,7 +2,7 @@
 
 return
     'CREATE TABLE `t_news` (
-      `news _id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      `news_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
       `news_titre` varchar(255) NOT NULL,
       `news_news` text NOT NULL,
       `news_photo` varchar(255) NOT NULL,

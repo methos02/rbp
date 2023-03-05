@@ -23,14 +23,14 @@ spl_autoload_register(function($class) {
     return file_exists($file) ? require_once $file : false;
 });
 
-if( !str_contains(script_name, 'command')  && !isset($_SESSION['already_visited']) && !in_array($_SERVER['REMOTE_ADDR'], array('81.240.125.88'))){
+if((!defined('script_name') ||  !str_contains(script_name, 'command'))  && !isset($_SESSION['already_visited']) && !in_array($_SERVER['REMOTE_ADDR'], array('81.240.125.88'))){
     $_SESSION['already_visited'] = true;
     Core_rbp::visiteur();
 }
 
 $params = [];
 
-if( !str_contains(script_name, 'command')) {
+if(!defined('script_name') || !str_contains(script_name, 'command')) {
     $params['log'] = Droit::factory()->getLog();
 }
 

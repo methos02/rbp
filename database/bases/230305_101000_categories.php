@@ -2,7 +2,7 @@
 
 return
     'CREATE TABLE `t_categorie` (
-      `cat _id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      `cat_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
       `cat_categorie` varchar(20) NOT NULL,
       `cat_id_section` int(11) NOT NULL,
       `cat_id_fonction` int(11) NOT NULL,

@@ -2,7 +2,7 @@
 
 return
     'CREATE TABLE `t_photo` (
-      `pho _id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      `pho_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
       `pho_photo` varchar(255) NOT NULL,
       `pho_id_album` int(10) NOT NULL,
       `pho_nom_modif` varchar(255) NOT NULL,

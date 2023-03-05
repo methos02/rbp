@@ -2,7 +2,7 @@
 
 return
     'CREATE TABLE `t_adherent` (
-      `adh _id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT PRIMARY KEY AUTO_INCREMENT,
+      `adh_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT PRIMARY KEY AUTO_INCREMENT,
       `adh_nom` varchar(255) NOT NULL,
       `adh_prenom` varchar(255) NOT NULL,
       `adh_birth` date NOT NULL,

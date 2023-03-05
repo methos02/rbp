@@ -1,4 +1,7 @@
 <?php
+
+use App\Core\Core_rbp;
+
 include __DIR__.'/includes/init.php';
 $meta['nom'] = 'Royal Brussels Poseidon - Accueil';
 $newsFactory = News::factory();
@@ -12,7 +15,7 @@ if(!isset($_SESSION['already_visited']) && !in_array($_SERVER['REMOTE_ADDR'], ar
 
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<?php include ('includes/head.php') ?>
 	<body class="no-sectionBarre">
         <div class="container-fluid">

@@ -2,7 +2,7 @@
 
 return
     'CREATE TABLE `t_article` (
-      `art _id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      `art_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
       `art_id_section` int(11) NOT NULL,
       `art_nom` varchar(25) CHARACTER SET utf8 NOT NULL,
       `art_article` text CHARACTER SET utf8 NOT NULL,

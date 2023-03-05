@@ -2,7 +2,7 @@
 
 return
     'CREATE TABLE `t_cs` (
-      `cs _id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      `cs_id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
       `cs_id_update` varchar(30) NOT NULL,
       `cs_id_adherent` int(11) NOT NULL,
       `cs_id_section` int(11) NOT NULL,
