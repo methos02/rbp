@@ -1,5 +1,8 @@
 <?php
-use Connection\Connection;
+
+use App\Core\Connection;
+use App\Core\Core_rbp;
+
 class Photo extends Table {
     CONST PHOTO_PATH = '/photo/';
     CONST PHOTO_REAL_PATH = 'images/photo/';
@@ -9,11 +12,8 @@ class Photo extends Table {
         UPLOAD_ERR_INI_SIZE => 'La photo es trop volumineuse.'
     ];
 
-    public static function factory() {
-        $dbb = Connection::getInstance();
-        $instance = new Photo($dbb);
-
-        return $instance;
+    public static function factory():self {
+        return new Photo(Connection::getInstance());
     }
 
     public function addAlbum ($nom, $slug, $id_saison, $id_section) {

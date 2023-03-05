@@ -1,6 +1,10 @@
-<?php include __DIR__.'/../includes/init.php';
-$bdd = Connection\Connection::getInstance();
-$generator = new \Ausi\SlugGenerator\SlugGenerator();
+<?php
+use App\Core\Connection;
+use Ausi\SlugGenerator\SlugGenerator;
+
+include __DIR__.'/../includes/init.php';
+$bdd = Connection::getInstance();
+$generator = new SlugGenerator();
 
 $albums = $bdd->reqMulti('SELECT alb_id as id, alb_nom as nom, alb_slug as slug FROM t_album');
 

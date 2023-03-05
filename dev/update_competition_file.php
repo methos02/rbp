@@ -1,5 +1,9 @@
-<?php include __DIR__.'/../includes/init.php';
-$bdd = Connection\Connection::getInstance();
+<?php
+use App\Core\Connection;
+
+include __DIR__.'/../includes/init.php';
+
+$bdd = Connection::getInstance();
 
 $competitions = $bdd->req('SELECT com_id, com_liste, com_resultat, com_programme FROM t_competition')->fetchAll(PDO::FETCH_ASSOC);
 

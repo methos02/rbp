@@ -1,5 +1,7 @@
 <?php
-use Connection\Connection;
+
+use App\Core\Connection;
+
 class Droit extends Table {
     CONST USER = 0;
     CONST REDAC = 1;
@@ -20,11 +22,8 @@ class Droit extends Table {
         self::ADMIN => self::DROITS[self::ADMIN]['label']
     ];
 
-    public static function factory() {
-        $dbb = Connection::getInstance();
-        $instance = new Droit($dbb);
-
-        return $instance;
+    public static function factory(): Droit {
+        return new Droit(Connection::getInstance());
     }
 
     public function getLog(){

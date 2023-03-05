@@ -1,5 +1,7 @@
 <?php
-use Connection\Connection;
+
+use App\Core\Connection;
+
 class News extends Table {
     CONST PATH_IMG_REAL = '/images/news/';
     CONST PATH_IMG_NEWS = '/news/';
@@ -17,11 +19,8 @@ class News extends Table {
 
     CONST NUMBER_NEWS = 6;
 
-    public static function factory() {
-        $dbb = Connection::getInstance();
-        $instance = new News($dbb);
-
-        return $instance;
+    public static function factory():self {
+        return new News(Connection::getInstance());
     }
 
     public function addNews($titre, $news, $photo, $id_section, $posteur) {

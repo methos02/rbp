@@ -1,11 +1,10 @@
 <?php
-use Connection\Connection;
-class Saison extends Table {
-    public static function factory() {
-        $dbb = Connection::getInstance();
-        $instance = new Saison($dbb);
 
-        return $instance;
+use App\Core\Connection;
+
+class Saison extends Table {
+    public static function factory():self{
+        return new Saison(Connection::getInstance());
     }
 
     public function getSaison($id_saison){

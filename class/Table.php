@@ -1,8 +1,9 @@
 <?php
-use Connection\Connection;
+
+use App\Core\Connection;
 
 class Table {
-    protected $bdd;
+    protected Connection $bdd;
 
     public function __construct(Connection $bdd) {
         $this -> bdd = $bdd;

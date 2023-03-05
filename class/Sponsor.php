@@ -1,6 +1,7 @@
 <?php
 
-use Connection\Connection;
+use App\Core\Connection;
+
 class Sponsor extends Table {
     CONST URL_LOGO = '/logo/';
     CONST URL_REAL_PATH = '/images/logo/';
@@ -8,11 +9,8 @@ class Sponsor extends Table {
     CONST SIZE_LOGO = '500000';
     CONST DIM_LOGO = ['1000', '1000'];
 
-    public static function factory() {
-        $dbb = Connection::getInstance();
-        $instance = new Sponsor($dbb);
-
-        return $instance;
+    public static function factory():self {
+        return new Sponsor(Connection::getInstance());
     }
 
     public function addSponsor($nom, $id_section, $numb, $rue, $cp, $ville, $tel, $mail, $site, $description, $nom_logo, $id_domaine) {

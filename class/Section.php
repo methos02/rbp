@@ -1,5 +1,7 @@
 <?php
-use Connection\Connection;
+
+use App\Core\Connection;
+
 class Section extends Table{
     const NATATION = ['id' => 1,'nom' => 'Natation', 'slug' => 'natation'];
     const WATERPOLO = ['id' => 2,'nom' => 'Water-polo', 'slug' => 'waterpolo'];
@@ -49,11 +51,8 @@ class Section extends Table{
         self::PLONGEON['id'] => self::PLONGEON['nom']
     ];
 
-    public static function factory() {
-        $dbb = Connection::getInstance();
-        $instance = new Section($dbb);
-
-        return $instance;
+    public static function factory():self {
+        return new Section(Connection::getInstance());
     }
 
     public function getCategorie($id_categorie){

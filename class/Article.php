@@ -1,5 +1,7 @@
 <?php
-use Connection\Connection;
+
+use App\Core\Connection;
+
 class Article extends Table {
 
     const S_ARTICLE = [
@@ -9,11 +11,8 @@ class Article extends Table {
         Section::COMITE['id'] => ['presentation', 'historique', 'cotisation', 'sponsor', 'pourquoi', 'comment']
     ];
 
-    public static function factory() {
-        $dbb = Connection::getInstance();
-        $instance = new Article($dbb);
-
-        return $instance;
+    public static function factory():self {
+        return new Article(Connection::getInstance());
     }
 
     public function getArticle($id_article) {

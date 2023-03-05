@@ -1,22 +1,25 @@
 <?php
-namespace Connection;
-use PDO;
+namespace App\Core;
 
-class Connection extends PDO{
+use PDO;
+use PDOStatement;
+
+class Connection extends PDO {
 
     private static $_instance;
+    const FRESH = true;
 
-    public static function getInstance(){
+    public static function getInstance($fresh = false):self{
         if(is_null(self::$_instance)){
-            self::$_instance = new Connection('mysql:host='.DB_HOST.';dbname='.DB_NAME,DB_USERNAME,DB_PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+            self::$_instance = new Connection('mysql:host='.DB_HOST.';' . (!$fresh ? 'dbname='.DB_NAME : ''),DB_USERNAME,DB_PASSWORD, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
             self::$_instance->query("SET NAMES UTF8");
         }
 
         return self::$_instance;
     }
 
-    public function reqMulti(string $requet, array $paramReq = [], array $param = []) {
-        $result = $this->req($requet, $paramReq)->fetchAll(PDO::FETCH_ASSOC);
+    public function reqMulti(string $request, array $paramReq = [], array $param = []) {
+        $result = $this->req($request, $paramReq)->fetchAll(PDO::FETCH_ASSOC);
 
         if(isset($param['result']) && $param['result'] == 'singleArray') {
             return $this->singleArray($result);
@@ -29,35 +32,35 @@ class Connection extends PDO{
         return $result;
     }
 
-    public function reqSingle(string $requet, array $param = []) {
-        return $this->req($requet, $param)->fetch(PDO::FETCH_ASSOC);
+    public function reqSingle(string $request, array $param = []) {
+        return $this->req($request, $param)->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function reqIn(string $requet, $params = []) {
-        $req = $this->req($requet);
+    public function reqIn(string $request, $params = []) {
+        $req = $this->req($request);
 
-        if(isset($params['multi']) && $params['multi'] == true) {
+        if(isset($params['multi']) && $params['multi']) {
             return $req -> fetchAll(PDO::FETCH_ASSOC);
         }
 
         return $req -> fetch(PDO::FETCH_ASSOC);
     }
 
-    public function req($requet, $param = []){
+    public function req($request, $param = []): bool|PDOStatement {
         if(!empty($param)){
-            $req = $this ->prepare($requet);
-            $req -> execute($param);
+            $req = $this->prepare($request);
+            $req->execute($param);
             return $req;
         }
 
-        return $this ->query($requet);
+        return $this->query($request);
     }
 
     public function last(){
        return $this -> lastInsertId();
     }
 
-    //Regrouper les résultats quand une seul array
+    //Regrouper les résultats quand un seul array
     public function singleArray(array $results):array {
         $array = [];
 

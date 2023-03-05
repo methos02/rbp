@@ -1,5 +1,7 @@
 <?php
-use Connection\Connection;
+
+use App\Core\Connection;
+
 class Club extends Table {
 
     CONST DEFAUT_PHOTO = 'inconnu.jpg';
@@ -9,11 +11,8 @@ class Club extends Table {
     CONST SIZE_PHOTO = '5000000';
     CONST DIM_PHOTO = ['3000', '3000'];
 
-    public static function factory() {
-        $dbb = Connection::getInstance();
-        $instance = new Club($dbb);
-
-        return $instance;
+    public static function factory():self {
+        return new Club(Connection::getInstance());
     }
 
     public function addMembreH($nom, $prenom, $id_civilite, $date_birth, $date_death, $bio, $photo) {

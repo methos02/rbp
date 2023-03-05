@@ -1,5 +1,7 @@
 <?php
-use Connection\Connection;
+
+use App\Core\Connection;
+
 class Adherent extends Table {
     CONST COTISATION = '5-6';
     CONST ID_SECTION = 0;
@@ -26,11 +28,8 @@ class Adherent extends Table {
         'E' => " AND adh_mail = '' AND adh_mail_mere = '' AND adh_mail_pere = ''",
     ];
 
-    public static function factory() {
-        $dbb = Connection::getInstance();
-        $instance = new Adherent($dbb);
-
-        return $instance;
+    public static function factory():self {
+        return new Adherent(Connection::getInstance());
     }
 
     public function addAdherent($nom, $prenom, $date_birth, $civilite, $nationnalite){
@@ -234,11 +233,11 @@ class Adherent extends Table {
     public function getAdherentCategories($id_adherent_saison) {
         return $this -> bdd->reqMulti('SELECT DISTINCT adc_id_fonction as id_fonction, adc_id_section as id_section, adc_id_categorie as id_categorie, cat_categorie as categorie FROM t_adherent_categorie 
                                          INNER JOIN t_categorie ON cat_id = adc_id_categorie
-                                         WHERE adc_id_adh_saison = :id_ads AND adc_supp = 0 ORDER BY adc_id_section ASC, adc_id_fonction ASC', ['id_ads'=>$id_adherent_saison]);
+                                         WHERE adc_id_adh_saison = :id_ads AND adc_supp = 0 ORDER BY adc_id_section, adc_id_fonction', ['id_ads'=>$id_adherent_saison]);
     }
 
     public function getAdherentCs($id_adherent) {
-        return $this -> bdd->reqMulti('SELECT cs_id_section as id_section FROM t_cs WHERE cs_id_adherent = :id_adherent AND cs_supp = 0 ORDER BY cs_id_section ASC',['id_adherent'=>$id_adherent]);
+        return $this -> bdd->reqMulti('SELECT cs_id_section as id_section FROM t_cs WHERE cs_id_adherent = :id_adherent AND cs_supp = 0 ORDER BY cs_id_section',['id_adherent'=>$id_adherent]);
     }
 
     public function getAdherentIdCat($id_ads) {

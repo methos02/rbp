@@ -1,10 +1,13 @@
 <?php
+namespace App\Core;
+
 class Core_rbp {
     static $BDD;
     CONST COTISATION = 300;
     CONST URL_CAPTCHA = 'https://www.google.com/recaptcha/api/siteverify?secret='.SECRET_CLE.'&response=';
 
-    public static function icon($icon, $color) {
+    public static function icon($icon, $color): string
+    {
         return '<span class="glyphicon glyphicon-'.$icon.'" style="color:'.$color.'"></span>';
     }
 
@@ -58,13 +61,13 @@ class Core_rbp {
         return curl_exec($curl);
     }
 
-    public static function visiteur(){
-        self::$BDD = \Connection\Connection::getInstance();
+    public static function visiteur(): void {
+        self::$BDD = Connection::getInstance();
         self::$BDD->req('UPDATE t_info SET inf_visiteur = inf_visiteur + 1');
     }
 
     public static function getCategorieBtn($id_saison, $id_categorie){
-        self::$BDD = \Connection\Connection::getInstance();
+        self::$BDD = Connection::getInstance();
 
         $categories = self::$BDD->reqMulti('SELECT cat_categorie, cat_ID FROM t_equipe_saison
                                               INNER JOIN t_categorie ON equ_ID_categorie = cat_ID 

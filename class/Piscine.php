@@ -1,11 +1,10 @@
 <?php
-use \Connection\Connection;
-class Piscine extends Table {
-    public static function factory(){
-        $dbb = Connection::getInstance();
-        $instance = new Piscine($dbb);
 
-        return $instance;
+use App\Core\Connection;
+
+class Piscine extends Table {
+    public static function factory():self{
+        return new Piscine(Connection::getInstance());
     }
 
     public function addPiscine($nom, $numb, $rue, $cp, $ville){

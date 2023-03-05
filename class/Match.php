@@ -1,15 +1,14 @@
 <?php
-use Connection\Connection;
-class Match extends Table {
+
+use App\Core\Connection;
+
+class MatchM extends Table {
     CONST CLE_CRON = ['bot' => 'r1NMMY63qk1jAkFa6dvU', 'admin' => 'QRift15I5222Ib1FZp3T'];
     CONST DEFAULT_TEAM = 45;
     private $match_count = 0;
 
-    public static function factory() {
-        $dbb = Connection::getInstance();
-        $instance = new Match($dbb);
-
-        return $instance;
+    public static function factory():self {
+        return new MatchM(Connection::getInstance());
     }
 
     public function addUpdateMatch($id_match, $numb_match, $coupe, $club_in, $initiale_in, $club_out, $initiale_out, $score, $arbitre, $id_categorie, $id_piscine, $id_saison, $date_match) {
