@@ -1,5 +1,6 @@
 <?php
 //Include config file
+use App\Core\Connection;
 use App\Core\Core_rbp;
 
 include __DIR__.'/conf.php';
@@ -15,6 +16,7 @@ mb_internal_encoding('UTF-8');
 @session_start();
 
 include dirname(__DIR__ ).'/app/helpers/path_helpers.php';
+include dirname(__DIR__ ).'/app/helpers/url_helpers.php';
 include dirname(__DIR__ ).'/app/helpers/debug_helpers.php';
 
 include dirname(__DIR__ ).'/vendor/autoload.php';
@@ -36,5 +38,4 @@ if(!defined('script_name') || !str_contains(script_name, 'command')) {
 }
 
 $params['meta'] = [];
-
 return $params;

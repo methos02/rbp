@@ -40,13 +40,13 @@ class Connection extends PDO {
         $req = $this->req($request);
 
         if(isset($params['multi']) && $params['multi']) {
-            return $req -> fetchAll(PDO::FETCH_ASSOC);
+            return $req->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        return $req -> fetch(PDO::FETCH_ASSOC);
+        return $req->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function req($request, $param = []): bool|PDOStatement {
+    public function req($request, $param = []) {
         if(!empty($param)){
             $req = $this->prepare($request);
             $req->execute($param);

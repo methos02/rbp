@@ -1,6 +1,6 @@
 <?php
 
-function dd($datas):void {
+function dd(...$datas):void {
     var_dump($datas);
     die;
 }

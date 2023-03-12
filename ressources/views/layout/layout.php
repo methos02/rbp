@@ -7,26 +7,27 @@ use App\Helpers\Auth;
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="HandheldFriendly" content="true" />
-    <link rel="icon" type="image/png" href="/images/icone.jpg">
-    <link rel="stylesheet" href="/bootstrap.min.css">
-    <link rel="stylesheet" href="/rbp.css">
+
+    <link rel="icon" type="image/png" href="<?= images_url('icon.jpg') ?>">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="<?= css_url('rbp.css') ?>">
+
     <?php if(stripos($_SERVER['SCRIPT_NAME'], 'photo_manage') !== false ){ echo '<link rel="stylesheet" href="/dropzone.css">';}?>
     <?php if(stripos($_SERVER['SCRIPT_NAME'], 'photo.') !== false ){ echo '<link rel="stylesheet" href="/lightgallery.min.css">';}?>
     <title><?php if(isset($meta['nom'])){ echo $meta['nom']; } else {echo 'Royals Brussels Poseidon'; } ?></title>
 
-    <script src="/jQuery.js" defer></script>
-    <script src="/vendor/ckeditor/ckeditor.js" defer></script>
-    <script src="/vendor/ckeditor/adapters/jquery.js" defer></script>
-    <script src="/bootstrap.min.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous" defer></script>
+    <script src="https://cdn.ckeditor.com/4.20.2/basic/ckeditor.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous" defer></script>
     <?php if (Auth::can(Droit::REDAC)): ?>
-        <script src="/admin.js" defer></script>
+        <script src="<?= js_url('admin.js') ?>" defer></script>
     <?php endif; ?>
     <?php if (str_contains($_SERVER['PHP_SELF'], 'photo')) : ?>
-        <script src="/lightgallery.min.js" defer></script>
-        <script src="/lg-thumbnail.min.js" defer></script>
+        <script src="<?= js_url('lightgallery.min.js') ?>" defer></script>
+        <script src="<?= js_url('js/lg-thumbnail.min.js') ?>" defer></script>
     <?php endif; ?>
-    <script src="/core.js" defer></script>
-    <script src="/form.js" defer></script>
+    <script src="<?= js_url('core.js') ?>" defer></script>
+    <script src="<?= js_url('form.js') ?>" defer></script>
 </head>
 <body class="no-sectionBarre">
 <div class="container-fluid">

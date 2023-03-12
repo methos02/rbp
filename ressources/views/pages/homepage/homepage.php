@@ -1,6 +1,4 @@
 <?php
-include __DIR__.'/includes/init.php';
-
 $meta['nom'] = 'Royal Brussels Poseidon - Accueil';
 
 ob_start();
@@ -18,28 +16,28 @@ ob_start();
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
                     <div class="item active">
-                        <img src="/images/accueil_1.jpeg" alt="Le club">
+                        <img src="<?= images_url('accueil_1.jpeg') ?>" alt="Le club">
                         <div class="carousel-caption" >
                             <h3 ><a href="club.html">Le club</a></h3>
                             <p><span class="image-accueil">Le RBP un club d'histoire.</span></p>
                         </div>
                     </div>
                     <div class="item">
-                        <img src="/images/accueil_2.jpeg" alt="natation">
+                        <img src="<?= images_url('accueil_2.jpeg') ?>" alt="natation">
                         <div class="carousel-caption">
                             <h3><a href="natation.html">Natation</a></h3>
                             <p>Sport alliant la technique et la performance.</p>
                         </div>
                     </div>
                     <div class="item">
-                        <img src="/images/accueil_3.jpeg" alt="waterpolo">
+                        <img src="<?= images_url('accueil_3.jpeg') ?>" alt="waterpolo">
                         <div class="carousel-caption">
                             <h3><a href="waterpolo.html">Water-polo</a></h3>
                             <p>Sport collectif aquatique.</p>
                         </div>
                     </div>
                     <div class="item">
-                        <img src="/images/accueil_4.jpeg" alt="plongeon">
+                        <img src="<?= images_url('accueil_4.jpeg') ?>" alt="plongeon">
                         <div class="carousel-caption">
                             <h3><a href="plongeon.html">Plongeon</a></h3>
                             <p>Sport alliant la gymnastique et le plaisir de l'eau.</p>
@@ -60,7 +58,7 @@ ob_start();
         </div>
         <h2 class="row-pad">Dernières News</h2>
         <div class="affiche-news" data-div="news">
-            <?php include ('includes/table/newsTable.php')?>
+            <?php include_file(views_path('pages/homepage/parts/_homepage-news.php')); ?>
         </div>
         <div class="modal fade" id="Modal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-news" role="document">
