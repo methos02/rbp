@@ -1,4 +1,6 @@
-<?php include __DIR__.'/../includes/init.php';
+<?php use App\Models\News;
+
+include __DIR__.'/../includes/init.php';
 $newsFactory = News::factory();
 $mailFactory = Mail::factory();
 $Utils = Utils::factory();

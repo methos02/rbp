@@ -1,4 +1,7 @@
 <?php
+
+use App\Models\News;
+
 include __DIR__.'/includes/init.php';
 $meta['nom'] = 'Royal Brussels Poseidon - News';
 $newsFactory = News::factory();

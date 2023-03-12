@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\News;
+
 News::create([
     'news_titre' => 'Première news',
     'news_news' => "C'est une première news",

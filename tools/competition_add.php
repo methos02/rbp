@@ -1,4 +1,6 @@
-<?php include('../includes/init.php');
+<?php use App\Models\News;
+
+include('../includes/init.php');
 $newsFactory = News::factory();
 $competitionFactory = Competition::factory();
 $piscineFactory = Piscine::factory();

@@ -2,15 +2,14 @@
 
 namespace App\Models;
 
-use App\Core\Connection;
-use Table;
+use App\Core\Orm\BuilderModel;
 
-class Model extends Table {
-    protected string $table = '';
+class Model extends BuilderModel {
+    protected static string $table = '';
+    protected static string $prefix = '';
     public static function factory():static {
-        return new static(Connection::getInstance());
+        return new static();
     }
-
     public static function create(array $datas):string {
         $model = static::factory();
 
@@ -19,13 +18,32 @@ class Model extends Table {
             if(!$model->has($property)) return 'error';
         }
 
-        $req = $model->bdd->prepare("INSERT INTO $model->table (". implode(',', $properties).") VALUES (". implode(',', array_map(fn(string $property) => ":$property", $properties)).")");
+        $req = $model->bdd->prepare("INSERT INTO ". static::$table ." (". implode(',', $properties).") VALUES (". implode(',', array_map(fn(string $property) => ":$property", $properties)).")");
         $req->execute($datas);
 
         return 'success';
     }
 
+    /** @noinspection PhpUnused */
+    public static function make(array $datas):static {
+        $model = static::factory();
+
+        $properties = array_keys($datas);
+        foreach ($properties as $property) {
+            $model->set($property, $datas[$property]);
+        }
+
+        return $model;
+    }
     public function has(string $property): bool {
         return property_exists($this, $property);
+    }
+    public function set(string $property, $value):static {
+        if($this->has($property)) { $this->$property = $value; }
+        return $this;
+    }
+    public function get(string $property):?string {
+        $property_name = static::$prefix . $property;
+        return $this->has($property_name)? $this->$property_name : null;
     }
 }

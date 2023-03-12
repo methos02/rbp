@@ -2,7 +2,6 @@
 namespace App\Core;
 
 use PDO;
-use PDOStatement;
 
 class Connection extends PDO {
 

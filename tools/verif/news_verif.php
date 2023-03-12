@@ -1,4 +1,7 @@
 <?php
+
+use App\Models\News;
+
 if($log['droit'] == Droit::USER){
     $result['message'] = Core_rbp::flash('danger','Vous devez être connecté pour accéder à cette page.');
 }

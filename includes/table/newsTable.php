@@ -2,6 +2,7 @@
 
 use App\Core\Core_rbp;
 use App\Helpers\Auth;
+use App\Models\News;
 
 $newsFactory = News::factory();
 $newsArray = $newsFactory->getNewsAccueil();
