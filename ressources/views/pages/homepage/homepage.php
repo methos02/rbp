@@ -1,4 +1,7 @@
 <?php
+
+use App\Models\News;
+
 $meta['nom'] = 'Royal Brussels Poseidon - Accueil';
 
 ob_start();
@@ -58,7 +61,12 @@ ob_start();
         </div>
         <h2 class="row-pad">Dernières News</h2>
         <div class="affiche-news" data-div="news">
-            <?php include_file(views_path('pages/homepage/parts/_homepage-news.php')); ?>
+            <?php
+                /** @var News $news */
+                foreach (News::limit(2)->get() as $news) :
+                    include_file(views_path('pages/news/parts/_news-short.php'), compact('news'));
+                endforeach;
+            ?>
         </div>
         <div class="modal fade" id="Modal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-news" role="document">

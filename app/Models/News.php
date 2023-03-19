@@ -5,14 +5,14 @@ namespace App\Models;
 use Section;
 
 class News extends Model {
-    protected static string $table = "t_news";
-    protected static string $prefix = "news_";
-    protected string $news_titre;
-    protected string $news_news;
-    protected string $news_photo;
-    protected string $news_nom_posteur;
-    protected string $news_date_p;
-    protected int $news_ID_section;
+    protected static string $table = "news";
+
+    protected string $title;
+    protected string $content;
+    protected string $picture;
+    protected string $created_by;
+    protected string $created_at;
+    protected int $section_id;
 
     const PATH_IMG_REAL = '/images/news/';
     const PATH_IMG_NEWS = '/news/';
@@ -30,7 +30,7 @@ class News extends Model {
     const NUMBER_NEWS = 6;
 
     public function getPictoPath():string {
-        return "picto_$this->news_ID_section.png";
+        return "picto_$this->section_id.png";
     }
 
     public function addNews($titre, $news, $photo, $id_section, $posteur)

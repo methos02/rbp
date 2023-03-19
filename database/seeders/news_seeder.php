@@ -2,22 +2,25 @@
 
 use App\Models\News;
 
-News::create([
-    'news_titre' => 'Première news',
-    'news_news' => "C'est une première news",
-    'news_photo' => News::IMG_DEFAULT_WP,
-    'news_nom_posteur' => 'LEON Frédéric',
-    'news_date_p' => '15-02-23',
-    'news_ID_section' => 1,
-]);
+$news_datas = [
+    [
+        'title' => 'Première news',
+        'content' => "C'est une première news",
+        'picture' => News::IMG_DEFAULT_WP,
+        'created_by' => 'LEON Frédéric',
+        'created_at' => '15-02-23',
+        'section_id' => 1,
+    ],
+    [
+        'title' => 'Seconde news',
+        'content' => "C'est une seconde news",
+        'picture' => News::IMG_DEFAULT_NAT,
+        'created_by' => 'Istiry Anne',
+        'created_at' => '05-03-23',
+        'section_id' => 1,
+    ]
+];
 
-News::create([
-    'news_titre' => 'Seconde news',
-    'news_news' => "C'est une seconde news",
-    'news_photo' => News::IMG_DEFAULT_NAT,
-    'news_nom_posteur' => 'Istiry Anne',
-    'news_date_p' => '05-03-23',
-    'news_ID_section' => 1,
-]);
-
-
+foreach ($news_datas as $news_data) {
+    if(!News::create($news_data)) { echo "Problème avec le seeder de la news {$news_data['title']}"; break; }
+}

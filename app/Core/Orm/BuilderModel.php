@@ -13,7 +13,7 @@ class BuilderModel {
 
         $properties = array_keys($datas);
         foreach ($properties as $property) {
-            if(!$model->has($property)) return 'error';
+            if(!$model->has($property)) return false;
         }
 
         return (new Builder(static::$table, static::class))->create($datas);

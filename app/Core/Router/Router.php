@@ -23,7 +23,6 @@ class Router {
     /** @throws RouterException */
     public static function run(){
         if(!isset(self::$routes[$_SERVER['REQUEST_METHOD']])) { throw new RouterException('REQUEST_METHOD does not exist'); }
-
         /** @var Route $route */
         foreach(self::$routes[$_SERVER['REQUEST_METHOD']] as $route){
             if($route->match(self::$url)) { $route->call(); return; }
