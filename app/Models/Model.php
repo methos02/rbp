@@ -10,19 +10,6 @@ class Model extends BuilderModel {
     public static function factory():static {
         return new static();
     }
-    public static function create(array $datas):string {
-        $model = static::factory();
-
-        $properties = array_keys($datas);
-        foreach ($properties as $property) {
-            if(!$model->has($property)) return 'error';
-        }
-
-        $req = $model->bdd->prepare("INSERT INTO ". static::$table ." (". implode(',', $properties).") VALUES (". implode(',', array_map(fn(string $property) => ":$property", $properties)).")");
-        $req->execute($datas);
-
-        return 'success';
-    }
 
     /** @noinspection PhpUnused */
     public static function make(array $datas):static {

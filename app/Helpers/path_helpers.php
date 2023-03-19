@@ -9,7 +9,7 @@ function includes_path($file = ""): string {
     return project_path("\\includes\\".$file);
 }
 function project_path($file = ""):string {
-    return dirname(getcwd()).$file;
+    return getcwd().$file;
 }
 function routes_path($file = ""): string {
     return project_path("\\routes\\".$file);

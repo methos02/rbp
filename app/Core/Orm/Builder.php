@@ -9,7 +9,7 @@ class Builder {
     private static $bdd;
     private ?int $limit;
 
-    public function __construct(private readonly string $table, private string $model ) {}
+    public function __construct(private readonly string $table, private readonly string $model ) {}
 
     public static function getInstance($fresh = false) {
         if(is_null(self::$bdd)){
@@ -40,5 +40,10 @@ class Builder {
     private function generateSelect():string {
         return "SELECT * FROM $this->table" . $this->getLimit();
     }
-    
+
+    public function create(array $datas):bool {
+        $properties = array_keys($datas);
+        $req = self::getInstance()->prepare("INSERT INTO ". $this->table ." (". implode(',', $properties).") VALUES (". implode(',', array_map(fn(string $property) => ":$property", $properties)).")");
+        return $req->execute($datas);
+    }
 }
