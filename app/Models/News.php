@@ -5,6 +5,7 @@ namespace App\Models;
 use Section;
 
 class News extends Model {
+    const S_VALIDE = 0;
     protected static string $table = "news";
 
     protected string $title;
@@ -27,7 +28,7 @@ class News extends Model {
     const MAIL_ACTIF = 0;
     const MAIL_SUPP = 1;
 
-    const NUMBER_NEWS = 6;
+    const PER_PAGE = 6;
 
     public function getPictoPath():string {
         return "picto_$this->section_id.png";
@@ -73,7 +74,7 @@ class News extends Model {
     public function getNewsBySectionPage($id_section, $page)
     {
         $id_section = ($id_section == null || !in_array($id_section, [1, 2, 3, 4])) ? '1,2,3,4' : $id_section;
-        $limite = ($page == null) ? 0 : ($page - 1) * News::NUMBER_NEWS;
+        $limite = ($page == null) ? 0 : ($page - 1) * News::PER_PAGE;
 
         return $this->bdd->reqMulti('SELECT news_ID as id_news, news_nom_posteur as nom_posteur, DATE_FORMAT(news_date_p, \'%d/%m/%Y\') AS date, news_titre as titre, news_news as news, news_photo as photo, news_ID_section as id_section FROM t_news WHERE news_ID_section IN (' . $id_section . ') AND news_supplogiq = 0 ORDER BY news_date_p DESC LIMIT ' . $limite . ',6');
     }
@@ -101,7 +102,7 @@ class News extends Model {
             return '';
         }
 
-        $page_max = floor($nb_news / News::NUMBER_NEWS) + 1;
+        $page_max = floor($nb_news / News::PER_PAGE) + 1;
         $page_under = ($page > 1) ? ' data-page="' . ($page - 1) . '"' : '';
         $page_up = ($page < $page_max) ? ' data-page="' . ($page + 1) . '"' : '';
 

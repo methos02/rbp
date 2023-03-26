@@ -7,7 +7,8 @@ use PDO;
 
 class Builder {
     private static $bdd;
-    private ?int $limit;
+    private ?int $limit = null;
+    private array $where = [];
 
     public function __construct(private readonly string $table, private readonly string $model ) {}
 
@@ -19,26 +20,47 @@ class Builder {
 
         return self::$bdd;
     }
-    
+    public function where($conditions):Builder {
+        $this->where = array_merge($this->where, $conditions);
+        return $this;
+    }
+    public function getWhere():string {
+        if(empty($this->where)) return '';
+
+        $wheres = [];
+        foreach ($this->where as $key => $value) { $wheres[] = "$key = :$key"; }
+
+        return ' WHERE ' . implode(' AND ', $wheres);
+    }
     public function limit($limit):Builder {
         $this->limit = $limit;
         return $this;
     }
 
     public function getLimit():string {
-        return $this->limit !== null ? ' LIMIT ' .$this->limit : '';
+        return $this->limit !== null ? ' LIMIT '. $this->limit : '';
     }
     
     public function get():array {
         $statement = self::getInstance()->prepare($this->generateSelect());
-        $statement->execute();
+        $statement->execute($this->where);
         $models_datas = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         return array_map(fn($model_datas) => call_user_func_array($this->model . '::make', ['datas' => $model_datas]), $models_datas);
     }
 
-    private function generateSelect():string {
-        return "SELECT * FROM $this->table" . $this->getLimit();
+    public function count():int {
+        $statement = self::getInstance()->prepare($this->generateSelect('count(*)'));
+        $statement->execute($this->where);
+        return $statement->fetchColumn();
+    }
+
+    private function generateSelect($fields = '*'):string {
+        return "SELECT $fields FROM $this->table" . $this->generateEndRequest();
+    }
+
+    private function generateEndRequest():string {
+        return $this->getWhere().$this->getLimit();
     }
 
     public function create(array $datas):bool {

@@ -62,7 +62,6 @@ ob_start();
         <h2 class="row-pad">Dernières News</h2>
         <div class="affiche-news" data-div="news">
             <?php
-                /** @var News $news */
                 foreach (News::limit(2)->get() as $news) :
                     include_file(views_path('pages/news/parts/_news-short.php'), compact('news'));
                 endforeach;

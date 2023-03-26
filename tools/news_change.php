@@ -1,5 +1,6 @@
 <?php
 
+use App\Core\Core_rbp;
 use App\Models\News;
 
 include __DIR__.'/../includes/init.php';
@@ -18,7 +19,7 @@ if ($result['message'] == "") {
     $id_section = (isset($_POST['sSection']) && $_POST['sSection'] != 'all')? Section::SLUG_TO_ID[$_POST['sSection']] : null;
     $nb_news = $newsFactory->getNbNewsBySection($id_section);
 
-    if(isset($_POST['page']) && $_POST['page'] > floor($nb_news / News::NUMBER_NEWS) + 1) {
+    if(isset($_POST['page']) && $_POST['page'] > floor($nb_news / News::PER_PAGE) + 1) {
         $result['message'] = Core_rbp::flash('danger', "La page est supérieur au nombre de news.");
     }
 }

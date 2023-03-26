@@ -8,6 +8,8 @@ class Section extends Table{
     const PLONGEON = ['id' => 3,'nom' => 'Plongeon', 'slug' => 'plongeon'];
     const COMITE = ['id' => 4,'nom' => 'Comité', 'slug' => 'comite'];
 
+    const SECTIONS_ID = [1,2,3,4];
+
     const BTN_COLOR = [
         self::WATERPOLO['id'] => 'btn-success',
         self::PLONGEON['id'] =>  'btn-info',
