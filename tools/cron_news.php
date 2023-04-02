@@ -58,5 +58,5 @@ $news =  '<p>Voici la liste des évènements auxquels participe le RBP ce week-e
     .   '<p> Les sportifs du RBP</p>';
 
 $titre = 'Evênements du week-end';
-$newsFactory->addNews($titre, $news, News::IMG_DEFAULT_COMITE,Section::COMITE['id'], 'Royal Brussels Poseidon');
+$newsFactory->addNews($titre, $news, News::getDefaultImage(Section::COMITE['id']), Section::COMITE['id'], 'Royal Brussels Poseidon');
 $mailFactory ->sendMailNews($titre);

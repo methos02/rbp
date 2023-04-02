@@ -11,6 +11,10 @@ class BuilderModel {
         return (new Builder(static::$table, static::class))->limit($limit);
     }
 
+    public static function paginate(int $limit):array {
+        return (new Builder(static::$table, static::class))->paginate($limit);
+    }
+
     public static function create(array $datas):string {
         $model = static::factory();
 

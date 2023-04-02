@@ -8,7 +8,7 @@ $count_page = ceil($count / $per_page);
 $page = Request::get('page');
 ?>
 
-<div class="paginator" data-component="paginator">
+<div class="paginator" data-component="paginator" data-paginator="news">
     <button class="paginator_btn" data-page="0"<?= Html::disabled(is_null($page) || $page == 0)?>> << </button>
     <button class="paginator_btn" data-page="<?= !is_null($page) && $page > 0 ? $page-- : 0 ?>"<?= Html::disabled(is_null($page) || $page == 0)?>> < </button>
     <label class="paginator_label">

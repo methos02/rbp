@@ -21,6 +21,6 @@ class Request {
     }
     /** @noinspection PhpUnusedPrivateMethodInspection */
     private static function get_page():?string {
-        return isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] >= 0 ? $_GET['section_id'] : null;
+        return isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] >= 0 ? $_GET['page'] : 0;
     }
 }

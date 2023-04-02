@@ -19,14 +19,6 @@ if($message =="" && isset($_GET['page']) && (!is_numeric($_GET['page']) || $_GET
 
 $id_section = ($message == "" && isset($_GET['section']))? Section::SLUG_TO_ID[$_GET['section']] : null;
 
-if($message == "" && isset($_GET['page'])) {
-    $nb_news = $newsFactory->getNbNewsBySection($id_section);
-
-    if($_GET['page'] > floor($nb_news / News::PER_PAGE) + 1) {
-        $message = "La page est supérieur au nombre de news.";
-    }
-}
-
 $page = ($message == "" && isset($_GET['page']) && is_numeric($_GET['page']))? $_GET['page'] : 1;
 
 if($message != "") {
@@ -37,7 +29,7 @@ $section = (isset($_GET['section']))? $_GET['section'] : null;
 
 $section_condition = !is_null(Request::get('section')) ? ['section_id' => Section::get('id', Request::get('section'))] : [];
 
-$news_list = News::where(array_merge(['status' => News::S_VALIDE], $section_condition))->limit(News::PER_PAGE)->get();
+$news_list = News::where(array_merge(['status' => News::S_VALIDE], $section_condition))->paginate(News::PER_PAGE);
 $news_count = News::where(array_merge(['status' => News::S_VALIDE], $section_condition))->count();
 
 if(Request::isAjax()) {

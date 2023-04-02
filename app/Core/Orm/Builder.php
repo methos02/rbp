@@ -3,11 +3,13 @@
 namespace App\Core\Orm;
 
 use App\Core\Connection;
+use App\Core\Request;
 use PDO;
 
 class Builder {
     private static $bdd;
     private ?int $limit = null;
+    private int $offset = 0;
     private array $where = [];
 
     public function __construct(private readonly string $table, private readonly string $model ) {}
@@ -40,6 +42,16 @@ class Builder {
     public function getLimit():string {
         return $this->limit !== null ? ' LIMIT '. $this->limit : '';
     }
+
+    public function paginate(int $limit):array {
+        $this->limit = $limit;
+        $this->offset = Request::get('page');
+        return $this->get();
+    }
+
+    public function getOffset():string {
+        return $this->offset != 0 ? ' OFFSET '. $this->offset : '';
+    }
     
     public function get():array {
         $statement = self::getInstance()->prepare($this->generateSelect());
@@ -60,7 +72,7 @@ class Builder {
     }
 
     private function generateEndRequest():string {
-        return $this->getWhere().$this->getLimit();
+        return $this->getWhere().$this->getLimit().$this->getOffset();
     }
 
     public function create(array $datas):bool {

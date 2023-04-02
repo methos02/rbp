@@ -20,10 +20,6 @@ class News extends Model {
     const EXT_NEWS = ['jpeg', 'jpg'];
     const SIZE_NEWS = '40048000';
     const CLE_CRON = 'GnQzGnYObqjvsNU6dMEM';
-    const IMG_DEFAULT_COMITE = 'news_' . Section::COMITE['id'] . '.jpg';
-    const IMG_DEFAULT_NAT = 'news_' . Section::NATATION['id'] . '.jpg';
-    const IMG_DEFAULT_WP = 'news_' . Section::WATERPOLO['id'] . '.jpg';
-    const IMG_DEFAULT_PLO = 'news_' . Section::PLONGEON['id'] . '.jpg';
 
     const MAIL_ACTIF = 0;
     const MAIL_SUPP = 1;
