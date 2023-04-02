@@ -20,7 +20,7 @@ class Request {
         return isset($_GET['section']) && in_array($_GET['section'], array_keys(Section::GET_SECTIONS)) ? $_GET['section'] : null;
     }
     /** @noinspection PhpUnusedPrivateMethodInspection */
-    private static function get_page():?string {
+    private static function get_page():int {
         return isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] >= 0 ? $_GET['page'] : 0;
     }
 }
