@@ -28,6 +28,7 @@ use App\Helpers\Auth;
     <?php endif; ?>
     <script src="<?= js_url('core.js') ?>" defer></script>
     <script src="<?= js_url('form.js') ?>" defer></script>
+    <?= vite('js/app.js') ?>
 </head>
 <body class="no-sectionBarre">
 <div class="container-fluid">

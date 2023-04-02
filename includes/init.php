@@ -18,6 +18,7 @@ mb_internal_encoding('UTF-8');
 include dirname(__DIR__ ).'/app/helpers/path_helpers.php';
 include dirname(__DIR__ ).'/app/helpers/url_helpers.php';
 include dirname(__DIR__ ).'/app/helpers/debug_helpers.php';
+include dirname(__DIR__ ).'/app/helpers/vite_helpers.php';
 
 include dirname(__DIR__ ).'/vendor/autoload.php';
 
