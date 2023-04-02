@@ -17,7 +17,12 @@ class Section extends Table{
         self::COMITE['id'] => 'btn-warning'
     ];
 
-    const GET_SECTIONS = [self::NATATION, self::WATERPOLO, self::PLONGEON, self::COMITE];
+    const GET_SECTIONS = [
+        self::NATATION['slug'] => self::NATATION,
+        self::WATERPOLO['slug'] => self::WATERPOLO,
+        self::PLONGEON['slug'] => self::PLONGEON,
+        self::COMITE['slug'] => self::COMITE
+    ];
 
     const ID_TO_SLUG = [
         self::NATATION['id'] => self::NATATION['slug'],
@@ -52,6 +57,10 @@ class Section extends Table{
         self::WATERPOLO['id'] => self::WATERPOLO['nom'],
         self::PLONGEON['id'] => self::PLONGEON['nom']
     ];
+
+    public static function get($prop, $section_slug) {
+        return self::GET_SECTIONS[$section_slug][$prop] ?? null;
+    }
 
     public static function factory():self {
         return new Section(Connection::getInstance());

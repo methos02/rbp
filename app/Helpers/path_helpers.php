@@ -18,12 +18,3 @@ function routes_path($file = ""): string {
 function views_path($file = ""): string {
     return project_path("\\ressources\\views\\".$file);
 }
-function include_file(string $file_path, array $datas = []): void {
-    try {
-        if(!file_exists($file_path)) throw new Exception('File introuvable');
-        extract($datas);
-        include $file_path;
-    } catch (Exception $e) {
-        include exception_path();
-    }
-}

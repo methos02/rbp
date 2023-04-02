@@ -512,21 +512,6 @@ $(document).on('keyup', '.paginateur', function (e) {
     }
 });
 
-function change_news(page) {
-    let sSection = $('select[name=newsSection]').val();
-
-    $.post('/t-news_change', {sSection:sSection, page:page}, function(data){
-        if(data.message !== "") {
-            $('.message').html(data.message);
-            $('#message-flash').fadeIn();
-            return;
-        }
-
-        $('[data-div=news]').html(data.order_news);
-        $('.news-pagination').html(data.paginateur);
-    }, 'json')
-}
-
 //submit adresse mail news
 $('.form-mail-news').on('submit', function(e){
     e.preventDefault();
@@ -551,84 +536,3 @@ $('a[data-action=close-news-mail]').on('click', function(e){
 
     document.cookie = 'div_mail_news=0; expires=' + date.toGMTString() + '; path=/';
 });
-
-/* --------- */
-/* Key Press */
-/* ----------*/
-$(document).on('keydown',function(e) {
-    if(e.which === 37 || e.which === 39) {
-        if($('.news-pagination').length !== 0) {
-            let page = Number($('.paginateur').attr('placeholder')) + ((e.which === 37)? - 1 : 1);
-            let page_max = Number($('.news-pagination a:last-child').attr('data-page'));
-
-            if(page > 0 && page <= page_max ) {
-                change_news(page);
-                news_historique(page);
-            }
-        }
-    }
-});
-
-/* ------------------- */
-/* Fonction historique */
-/* ------------------- */
-let getParam = {};
-
-getParam.modif = function (obj) {
-    if(isHistory === 1 ) {
-        let url = getUrl();
-
-        if($.isEmptyObject(obj)) {
-            history.pushState(null, '', '/' +  url);
-            return;
-        }
-
-        let getParam = '';
-        let newParam = '';
-
-        $.each(obj, function(getKey, getValue) {
-            if(String(getKey).localeCompare('blind') === 0){return;}
-            newParam = (obj.blind === undefined || obj.blind.indexOf(getKey) === -1)? getKey + '-' + getValue: getValue;
-
-            if (getParam !== "") { getParam = getParam + '/' }
-            getParam = getParam + newParam;
-        });
-
-        history.pushState(obj, "", '/' + url + '/' + getParam);
-    }
-};
-
-function getUrl() {
-    let url_split = window.location.href.split("/");
-    return url_split[3];
-}
-
-function news_historique(page) {
-    let param = {};
-    let section = $('select[name=newsSection]').val();
-
-    if (section !== 'all') {
-        param.section = section;
-        param.blind = ['section'];
-    }
-
-    if (page !== '1' && page !== undefined) {
-        param.page = page
-    }
-
-    getParam.modif(param);
-}
-
-/* -------------------------- */
-/* Fonction retour en arriere */
-/* -------------------------- */
-window.onpopstate = function(event){
-    let url = location.pathname;
-    if (url.indexOf('news') !== -1) {
-        let page = (event.state !== null && event.state.page !== undefined)? event.state.page : undefined;
-        let section = (event.state !== null && event.state.section !== undefined)? event.state.section : 'all';
-
-        $('#section option[value="' + section + '"]').prop('selected', true);
-        change_news(page);
-    }
-};

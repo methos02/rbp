@@ -11,9 +11,13 @@ class Request {
         return $_GET[$key] ?? null;
     }
 
+    public static function isAjax():bool {
+        return isset($_SERVER['HTTP_X_REQUESTED_WITH']);
+    }
+
     /** @noinspection PhpUnusedPrivateMethodInspection */
-    private static function get_section_id():?string {
-        return isset($_GET['section_id']) && in_array($_GET['section_id'], Section::SECTIONS_ID) ? $_GET['section_id'] : null;
+    private static function get_section():?string {
+        return isset($_GET['section']) && in_array($_GET['section'], array_keys(Section::GET_SECTIONS)) ? $_GET['section'] : null;
     }
     /** @noinspection PhpUnusedPrivateMethodInspection */
     private static function get_page():?string {
