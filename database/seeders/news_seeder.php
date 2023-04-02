@@ -1,26 +1,22 @@
 <?php
 
 use App\Models\News;
+use Carbon\Carbon;
 
-$news_datas = [
-    [
-        'title' => 'Première news',
-        'content' => "C'est une première news",
-        'picture' => News::IMG_DEFAULT_WP,
-        'created_by' => 'LEON Frédéric',
-        'created_at' => '15-02-23',
-        'section_id' => 1,
-    ],
-    [
-        'title' => 'Seconde news',
-        'content' => "C'est une seconde news",
-        'picture' => News::IMG_DEFAULT_NAT,
-        'created_by' => 'Istiry Anne',
-        'created_at' => '05-03-23',
-        'section_id' => 1,
-    ]
-];
+$faker = Faker\Factory::create();
+$news_count = 50;
 
-foreach ($news_datas as $news_data) {
+for($i = 0; $i < $news_count; $i++) {
+    $section_id = $faker->numberBetween(1,4);
+    $news_data = [
+        'title' => 'news '. $i,
+        'content' => $faker->text(),
+        'picture' => News::getDefaultImage($section_id),
+        'created_by' => $faker->randomElement(['ISTIRY Anne', 'LEON Frédéric']),
+        'created_at' => Carbon::now()->subDays($news_count - $i)->format('d-m-y'),
+        'section_id' => $section_id,
+    ];
+
     if(!News::create($news_data)) { echo "Problème avec le seeder de la news {$news_data['title']}"; break; }
+    echo "news $i seedée ... \n";
 }

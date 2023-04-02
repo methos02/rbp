@@ -7,6 +7,8 @@
   "require": {
     "ext-pdo": "*",
     "ext-mbstring": "*",
-    "ext-curl": "*"
+    "ext-curl": "*",
+    "fakerphp/faker": "^1.21",
+    "nesbot/carbon": "^2.66"
   }
 }

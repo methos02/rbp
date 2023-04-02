@@ -34,6 +34,10 @@ class News extends Model {
         return "picto_$this->section_id.png";
     }
 
+    public static function getDefaultImage(string $id_section):string {
+        return 'news_' . $id_section . '.jpg';
+    }
+
     public function addNews($titre, $news, $photo, $id_section, $posteur)
     {
         $this->bdd->req('INSERT INTO t_news (news_titre, news_news, news_photo, news_nom_posteur, news_date_p, news_ID_section) VALUES (:titre, :news, :photo, :nom_posteur, NOW(), :id_section)', array('titre' => $titre, 'news' => $news, 'photo' => $photo, 'nom_posteur' => $posteur, 'id_section' => $id_section));
