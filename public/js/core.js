@@ -468,13 +468,6 @@ $('#photo_idSaison').on('change', function (e){
 /* ---------- */
 /*    NEWS    */
 /* ---------- */
-//affichage des news en fonction des sections
-$('select[name=newsSection]').on('change', function(e){
-    e.preventDefault();
-    change_news('1');
-    news_historique('1');
-});
-
 //lecture de le news
 $('[data-div=news]').on('click', '[data-affiche_news]', function(e){
     if($(e.target).is('.glyphicon')) { return; }
@@ -490,26 +483,6 @@ $('[data-div=news]').on('click', '[data-affiche_news]', function(e){
         $('[data-affiche]').html(data.news);
         $('#Modal').modal("show");
     }, 'json')
-});
-
-//changement de news
-$(document).on('click', '.paginateur-fleche', function(e){
-    e.preventDefault();
-    if($(this).hasClass('link-prevent')){return;}
-
-    let page = $(this).attr('data-page');
-    change_news(page);
-    news_historique(page);
-});
-
-$(document).on('keyup', '.paginateur', function (e) {
-    if (e.keyCode === 13) {
-        if($(this).hasClass('')){return;}
-
-        let page = $(this).val();
-        change_news(page);
-        news_historique(page);
-    }
 });
 
 //submit adresse mail news

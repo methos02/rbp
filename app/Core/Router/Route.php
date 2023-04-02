@@ -38,6 +38,6 @@ class Route
 
     /** @throws Exception */
     public function call(): void {
-        include_file(views_path($this->template_name . '.php'));
+        include_file(views_path($this->template_name));
     }
 }

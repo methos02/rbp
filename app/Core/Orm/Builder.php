@@ -50,7 +50,7 @@ class Builder {
     }
 
     public function getOffset():string {
-        return $this->offset != 0 ? ' OFFSET '. $this->offset : '';
+        return $this->offset != 0 ? ' OFFSET '. $this->offset * $this->limit : '';
     }
     
     public function get():array {

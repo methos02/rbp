@@ -15,11 +15,6 @@ if (isset($_GET['action']) && $_GET['action'] == 'new_mdp') {
     }
 }
 
-//Définition du message
-if(isset($_SESSION['flash'])){
-    $flash = $_SESSION['flash'];
-    unset($_SESSION['flash']);
-}
 ?>
 <header>
     <nav id="nav-header" class="navbar navbar-inverse navbar-fixed-top navbar-collapse">
@@ -70,6 +65,6 @@ if(isset($_SESSION['flash'])){
             </ul>
         </div>
     </nav>
-    <div class="message"><?php echo $flash ?></div>
+    <?php include_file(views_path('components/flash')) ?>
     <noscript><p class="alert">Veuillez activer le javascript de votre ordinateur pour que le site fonctionne correctement.</p></noscript>
 </header>
