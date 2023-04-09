@@ -1,6 +1,7 @@
 <?php
 use Connection\Connection;
-use Sendinblue\Mailin;
+//use Sendinblue\Mailin;
+
 Class Mail {
     PRIVATE $mail;
     PRIVATE $bdd;
@@ -49,7 +50,7 @@ Class Mail {
     ];
 
     public function __construct(Connection $bdd){
-        $this -> mail = new Mailin("https://api.sendinblue.com/v2.0", "NBghAmYPyGDFZsH7");
+//        $this -> mail = new Mailin("https://api.sendinblue.com/v2.0", "NBghAmYPyGDFZsH7");
         $this -> bdd = $bdd;
     }
 

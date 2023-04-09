@@ -1,0 +1,14 @@
+.maintenance-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.maintenance-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.maintenance-content {font-size: 30px;}
+.maintenance-img {margin: 10px 0;}

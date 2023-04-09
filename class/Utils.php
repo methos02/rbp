@@ -29,7 +29,7 @@ class Utils {
     }
 
     public function checkNom($nom) {
-        if(preg_match("#^[a-zA-ZÀ-ÿ\s\'-.]{0,100}$#",$nom)){
+        if(preg_match("/^[a-zA-ZÀ-ÿ’'._\s\-]{0,40}$/",$nom)){
             return true;
         }
         return false;
