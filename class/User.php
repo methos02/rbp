@@ -1,10 +1,12 @@
 <?php
-
-use App\Core\Connection;
+use Connection\Connection;
 
 class User extends Table {
-    public static function factory():self {
-        return new User(Connection::getInstance());
+    public static function factory(){
+        $dbb = Connection::getInstance();
+        $instance = new User($dbb);
+
+        return $instance;
     }
 
     public function updateMdp ($id_user, $mdp) {

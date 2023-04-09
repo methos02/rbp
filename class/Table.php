@@ -1,12 +1,11 @@
 <?php
-
-use App\Core\Connection;
+use Connection\Connection;
 
 class Table {
-    protected Connection $bdd;
+    protected $bdd;
 
     public function __construct(Connection $bdd) {
-        $this->bdd = $bdd;
+        $this -> bdd = $bdd;
     }
 
     //Déplacer des documents

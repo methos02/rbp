@@ -1,8 +1,0 @@
-.adherent-items {
-  display: inline-block;
-  width: 49%;
-}
-.adherent-cat:not(:last-child):after {
-  content: ',';
-  margin-right: 5px;
-}

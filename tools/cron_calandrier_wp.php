@@ -1,11 +1,6 @@
-<?php
-
-use App\Core\Core_rbp;
-
-include __DIR__.'/../includes/init.php';
-
+<?php include __DIR__.'/../includes/init.php';
 $piscineFactory = Piscine::factory();
-$matcheFactory =MatchM::factory();
+$matcheFactory = Match::factory();
 $utilsFactory = Utils::factory();
 $sectionFactory = Section::factory();
 $mailFactory = Mail::factory();
@@ -13,11 +8,11 @@ $mailFactory = Mail::factory();
 ini_set('display_errors', -1);
 ini_set('pcre.backtrack_limit', '999999999999');
 
-if(!isset($_GET['cle']) || !in_array($_GET['cle'],MatchM::CLE_CRON)) {
+if(!isset($_GET['cle']) || !in_array($_GET['cle'], Match::CLE_CRON)) {
     exit();
 }
 
-$calendrier = Calendrier::factory();
+$calendrier = new Calendrier();
 
 $urlSource = 'https://www.waterpolo-online.com/clubfr/?ClubId=WW0000000000270';
 $exec = Core_rbp::prepareCurl($urlSource);
@@ -25,7 +20,7 @@ $message = '';
 $matchsArray = [];
 $piscinesMissing = '';
 
-if($_GET['cle'] == MatchM::CLE_CRON['admin']) {
+if($_GET['cle'] == Match::CLE_CRON['admin']) {
     $calendrier->updateSendMail(Calendrier::SEND_MAIL_UNABLE);
 }
 
@@ -38,14 +33,14 @@ if ($message == "") {
     $piscines = $piscineFactory->getPiscinesWithWpoName();
     $arrayNameWPO = $piscineFactory->orderAssociateNameWpo($piscines);
 
-    //Récupération des catégories
+    //Récupération des catégorie
     $categories = $sectionFactory->getCategories();
     $arrayNameIdCat = $sectionFactory->orderCatIdNameWP($categories);
 
     $id_saison = Saison::factory()->saisonActive(false);
 
-    //Analyse des données récupérées en cURL
-    $exec = preg_replace("/[\r|\n]/", "", $exec);
+    //Analyse des données récupéré en cURL
+    $exec = preg_replace("/\r|\n/", "", $exec);
     $regex = '/<li id="rcorners_wedstrijden" class="accordion-item is-active" data-accordion-item>(.+?)<\/li>/s';
     preg_match_all($regex, $exec, $matchsLi);
 
@@ -213,7 +208,7 @@ if(!empty($message) || !empty($piscinesMissing) && $calendrier->getSendMail() ==
     $piscinesMissing = !empty($piscinesMissing)? ' <br> <strong>Erreur Piscine : </strong> <br> ' . $piscinesMissing : "";
     $mailFactory->mailErreurScraperWP($message . $piscinesMissing);
 
-    if($_GET['cle'] === MatchM::CLE_CRON['bot']) {
+    if($_GET['cle'] === Match::CLE_CRON['bot']) {
         $calendrier->updateSendMail(Calendrier::SEND_MAIL_DISABLE);
     }
 }

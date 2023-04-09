@@ -1,6 +1,4 @@
-<?php use App\Models\News;
-
-include __DIR__.'/includes/init.php';
+<?php include __DIR__.'/includes/init.php';
 
 if($log['droit'] == Droit::USER){
 	$_SESSION['flash'] = Core_rbp::flash('danger','Vous devez être connecté pour accéder à cette page.');

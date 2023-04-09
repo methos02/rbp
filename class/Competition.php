@@ -1,8 +1,5 @@
 <?php
-
-use App\Core\Connection;
-use App\Core\Core_rbp;
-
+use \Connection\Connection;
 class Competition extends Table {
     CONST S_ANNULE = 0;
     CONST S_PRESENT = 1;
@@ -12,9 +9,13 @@ class Competition extends Table {
     CONST FICHIER_URL = '/competition/';
     CONST FICHIER_REAL_PATH = '/documents/competition/';
 
-    public static function factory():self {
-        return new Competition(Connection::getInstance());
+    public static function factory(){
+        $dbb = Connection::getInstance();
+        $instance = new Competition($dbb);
+
+        return $instance;
     }
+
     public function addCompetition($nom, $statut, $id_saison, $date_in, $date_out, $heure, $id_piscine, $id_section, $resultat, $liste = NULL,$programme = NULL) {
         $this -> bdd -> req('INSERT INTO t_competition (com_nom, com_statut, com_id_saison, com_date_in, com_date_out, com_heure ,com_id_piscine, com_liste, com_programme, com_resultat, com_id_section, com_nom_creation, com_date_modif) VALUES (:nom, :statut, :id_saison, :date_in, :date_out, :heure, :id_piscine, :liste, :programme, :resultat, :id_section, :nom_creation, NOW())', ['nom' => $nom, 'statut' => $statut, 'id_saison' => $id_saison, 'date_in' => $date_in, 'date_out' => $date_out, 'heure' => $heure, 'id_piscine' => $id_piscine, 'liste' => $liste, 'programme' => $programme, 'resultat' => $resultat, 'id_section' => $id_section, 'nom_creation' => $_SESSION['auth']['user']]);
 
@@ -165,9 +166,14 @@ class Competition extends Table {
         return '<td  class="text-center hidden-xs hidden-sm"> - </td>';
     }
 
-    private function defineLogoParticipation($statut): string {
-        if ($statut == Competition::S_PRESENT) return Core_rbp::icon('ok', '#5cb85c');
-        if ($statut == Competition::S_PAS_PRESENT) return Core_rbp::icon('alert', 'darkorange');
+    private function defineLogoParticipation($statut) {
+        if ($statut == Competition::S_PRESENT) {
+            return Core_rbp::icon('ok', '#5cb85c');
+        }
+
+        if ($statut == Competition::S_PAS_PRESENT) {
+            return Core_rbp::icon('alert', 'darkorange');
+        }
 
         return Core_rbp::icon('remove', 'red');
     }

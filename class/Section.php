@@ -1,14 +1,10 @@
 <?php
-
-use App\Core\Connection;
-
+use Connection\Connection;
 class Section extends Table{
     const NATATION = ['id' => 1,'nom' => 'Natation', 'slug' => 'natation'];
     const WATERPOLO = ['id' => 2,'nom' => 'Water-polo', 'slug' => 'waterpolo'];
     const PLONGEON = ['id' => 3,'nom' => 'Plongeon', 'slug' => 'plongeon'];
     const COMITE = ['id' => 4,'nom' => 'Comité', 'slug' => 'comite'];
-
-    const SECTIONS_ID = [1,2,3,4];
 
     const BTN_COLOR = [
         self::WATERPOLO['id'] => 'btn-success',
@@ -17,12 +13,7 @@ class Section extends Table{
         self::COMITE['id'] => 'btn-warning'
     ];
 
-    const GET_SECTIONS = [
-        self::NATATION['slug'] => self::NATATION,
-        self::WATERPOLO['slug'] => self::WATERPOLO,
-        self::PLONGEON['slug'] => self::PLONGEON,
-        self::COMITE['slug'] => self::COMITE
-    ];
+    const GET_SECTIONS = [self::NATATION, self::WATERPOLO, self::PLONGEON, self::COMITE];
 
     const ID_TO_SLUG = [
         self::NATATION['id'] => self::NATATION['slug'],
@@ -58,12 +49,11 @@ class Section extends Table{
         self::PLONGEON['id'] => self::PLONGEON['nom']
     ];
 
-    public static function get($prop, $section_slug) {
-        return self::GET_SECTIONS[$section_slug][$prop] ?? null;
-    }
+    public static function factory() {
+        $dbb = Connection::getInstance();
+        $instance = new Section($dbb);
 
-    public static function factory():self {
-        return new Section(Connection::getInstance());
+        return $instance;
     }
 
     public function getCategorie($id_categorie){

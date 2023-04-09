@@ -1,8 +1,6 @@
 <?php
-
-use App\Core\Connection;
+use Connection\Connection;
 use Sendinblue\Mailin;
-
 Class Mail {
     PRIVATE $mail;
     PRIVATE $bdd;
@@ -55,8 +53,11 @@ Class Mail {
         $this -> bdd = $bdd;
     }
 
-    public static function factory():self {
-        return new Mail(Connection::getInstance());
+    public static function factory(){
+        $dbb = Connection::getInstance();
+        $instance = new Mail($dbb);
+
+        return $instance;
     }
 
     public function addMailNews ($mail, $cle) {
