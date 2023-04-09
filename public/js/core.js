@@ -468,23 +468,6 @@ $('#photo_idSaison').on('change', function (e){
 /* ---------- */
 /*    NEWS    */
 /* ---------- */
-//lecture de le news
-$('[data-div=news]').on('click', '[data-affiche_news]', function(e){
-    if($(e.target).is('.glyphicon')) { return; }
-    let id_news = $(this).data('affiche_news');
-
-    $.post('/t-news_affiche', {id_news:id_news}, function(data){
-        if(data.message !== "") {
-            $('.message').html(data.message);
-            $('#message-flash').fadeIn();
-            return;
-        }
-
-        $('[data-affiche]').html(data.news);
-        $('#Modal').modal("show");
-    }, 'json')
-});
-
 //submit adresse mail news
 $('.form-mail-news').on('submit', function(e){
     e.preventDefault();

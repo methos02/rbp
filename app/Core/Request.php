@@ -17,12 +17,12 @@ class Request {
 
     /** @noinspection PhpUnusedPrivateMethodInspection */
     private static function get_section():?string {
-        if(!in_array($_GET['section'], array_keys(Section::GET_SECTIONS))) Utils::flash('danger', "La section est invalide.");
+        if(isset($_GET['section']) && (!in_array($_GET['section'], array_keys(Section::GET_SECTIONS)))) Utils::flash('danger', "La section est invalide.");
         return isset($_GET['section']) && in_array($_GET['section'], array_keys(Section::GET_SECTIONS)) ? $_GET['section'] : null;
     }
     /** @noinspection PhpUnusedPrivateMethodInspection */
     private static function get_page():int {
-        if(!is_numeric($_GET['page']) || $_GET['page'] < 0) Utils::flash('danger', "La page est invalide.");
+        if(isset($_GET['page']) && (!is_numeric($_GET['page']) || $_GET['page'] < 0)) Utils::flash('danger', "La page est invalide.");
         return isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] >= 0 ? $_GET['page'] : 0;
     }
 }

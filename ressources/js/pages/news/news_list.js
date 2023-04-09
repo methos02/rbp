@@ -7,6 +7,7 @@ if(document.getElementById('container_news_list') !== null) {
         const target = defineTarget(e.target);
 
         if(target.dataset.page !== undefined) await loadSectionNews(location.pathname, target.dataset.page);
+        if(target.dataset.news !== undefined) await show_news(target.dataset.news);
     });
 
     document.addEventListener('change', async e => {
@@ -36,5 +37,18 @@ async function loadSectionNews(url, page) {
         [...document.querySelectorAll('[data-component="paginator"]')].forEach(paginator => paginator.innerHTML = res.data.paginator);
 
         history.pushState({}, 'rbp', url + definePageUrl(parseInt(page)))
+    }
+}
+
+async function show_news(news_id) {
+    const res = await get(`/news/${news_id}`);
+
+    if(res.status === 200) {
+        $('[data-affiche]').html(data.news);
+        $('#Modal').modal("show");
+    }
+
+    if(res.status !== 200) {
+        insertError(res.data.error);
     }
 }

@@ -16,6 +16,11 @@ class Route
         $this->template_name = $template_name;
     }
 
+    public function with($param, $regexp):self {
+        $this->match_rules[$param] = str_replace('(', '(?:', $regexp);
+        return $this;
+    }
+
     public function match($url): bool {
         $path = preg_replace_callback('#:(\w+)#', [$this, 'paramMatch'], $this->path);
         if(!preg_match("#^$path$#i", trim($url, '/'), $route_params)) return false;
@@ -32,7 +37,6 @@ class Route
     }
     private function paramMatch($match): string {
         $this->params[] = $match[1];
-
         return isset($this->match_rules[$match[1]]) ? '(' . $this->match_rules[$match[1]] . ')' : '([^/]+)';
     }
 

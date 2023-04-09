@@ -1,13 +1,11 @@
 <?php
-
 namespace App\Models;
-
-use Section;
 
 class News extends Model {
     const S_VALIDE = 0;
     protected static string $table = "news";
 
+    protected string $id;
     protected string $title;
     protected string $content;
     protected string $picture;
@@ -26,12 +24,11 @@ class News extends Model {
 
     const PER_PAGE = 6;
 
-    public function getPictoPath():string {
-        return "picto_$this->section_id.png";
-    }
+    public function getPictoPath():string { return "picto_$this->section_id.png"; }
+    public static function getDefaultImage(string $id_section):string { return 'news_' . $id_section . '.jpg'; }
 
-    public static function getDefaultImage(string $id_section):string {
-        return 'news_' . $id_section . '.jpg';
+    public function getPicture(): string {
+        return (file_exists(__DIR__ . '/..' . News::PATH_IMG_REAL . $this->picture)) ? $this->picture : 'news_' . $this->section_id . '.jpg';
     }
 
     public function addNews($titre, $news, $photo, $id_section, $posteur)
@@ -77,12 +74,6 @@ class News extends Model {
         $limite = ($page == null) ? 0 : ($page - 1) * News::PER_PAGE;
 
         return $this->bdd->reqMulti('SELECT news_ID as id_news, news_nom_posteur as nom_posteur, DATE_FORMAT(news_date_p, \'%d/%m/%Y\') AS date, news_titre as titre, news_news as news, news_photo as photo, news_ID_section as id_section FROM t_news WHERE news_ID_section IN (' . $id_section . ') AND news_supplogiq = 0 ORDER BY news_date_p DESC LIMIT ' . $limite . ',6');
-    }
-
-    public function setParams(array $news): array
-    {
-        $news['photo'] = (file_exists(__DIR__ . '/..' . News::PATH_IMG_REAL . $news['photo'])) ? $news['photo'] : 'news_' . $news['id_section'] . '.jpg';
-        return $news;
     }
 
     public function setsParams(array $newsArray): array

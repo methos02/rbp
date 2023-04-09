@@ -52,13 +52,18 @@ class Builder {
     public function getOffset():string {
         return $this->offset != 0 ? ' OFFSET '. $this->offset * $this->limit : '';
     }
-    
     public function get():array {
         $statement = self::getInstance()->prepare($this->generateSelect());
         $statement->execute($this->where);
         $models_datas = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         return array_map(fn($model_datas) => call_user_func_array($this->model . '::make', ['datas' => $model_datas]), $models_datas);
+    }
+
+    public function first():bool|array {
+        $statement = self::getInstance()->prepare($this->generateSelect());
+        $statement->execute($this->where);
+        return $statement->fetch(PDO::FETCH_ASSOC);
     }
 
     public function count():int {

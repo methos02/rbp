@@ -2,7 +2,7 @@
   "name": "my-php-project",
   "version": "0.0.0",
   "scripts": {
-    "dev": "APP_ENV=development vite",
+    "vite": "vite",
     "build": "vite build"
   },
   "dependencies": {
