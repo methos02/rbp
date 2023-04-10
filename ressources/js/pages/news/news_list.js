@@ -1,6 +1,9 @@
 import {defineTarget} from "../../utils/event";
 import {get} from "../../utils/axios";
 import {definePageParam, definePageUrl} from "../../components/paginator";
+import {getSecureElementById} from "../../utils/dom";
+import {modal_show} from "../../components/modal";
+import {insertError} from "../../components/flash";
 
 if(document.getElementById('container_news_list') !== null) {
     document.addEventListener('click', async e => {
@@ -41,11 +44,12 @@ async function loadSectionNews(url, page) {
 }
 
 async function show_news(news_id) {
+    /** @param {{news:string}} res */
     const res = await get(`/news/${news_id}`);
 
     if(res.status === 200) {
-        $('[data-affiche]').html(data.news);
-        $('#Modal').modal("show");
+        getSecureElementById('news-modal').innerHTML = res.data.news;
+        modal_show('news-modal');
     }
 
     if(res.status !== 200) {

@@ -4,7 +4,7 @@ if(isset($_SESSION['flash'])){
     unset($_SESSION['flash']);
 }
 ?>
-<div class="message">
+<div id="container-flashes" class="message">
     <?php if(isset($flash)): ?>
         <div class="alert alert-<?= $flash['type'] ?> message-unique" style="display:none" id="message-flash">
             <div class="message-title"><?= $flash['title'] ?></div>

@@ -19,7 +19,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'new_mdp') {
 <header>
     <nav id="nav-header" class="navbar navbar-inverse navbar-fixed-top navbar-collapse">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/accueil">
+            <a class="navbar-brand" href="/">
                 <img src="/images/banniere_rbp_mini.jpg" alt="Brand" class="img-responsive">
             </a>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
@@ -30,7 +30,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'new_mdp') {
         </div>
         <div id="navbar" class="collapse navbar-collapse navbar-right">
             <ul class="nav navbar-nav">
-                <li data-nav="accueil"><a href="/accueil">Accueil</a></li>
+                <li data-nav="accueil"><a href="/">Accueil</a></li>
                 <li data-nav="news"><a href="/news">News</a></li>
                 <li class="dropdown" data-nav="club">
                     <a href="club.html" class="dropdown-toggle" data-toggle="dropdown"> Le Club <span class="caret"></span></a>

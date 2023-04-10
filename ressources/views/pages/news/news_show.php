@@ -2,12 +2,14 @@
 use  App\Models\News;
 if(!isset($news)) { echo 'La variable news est inconnue'; return; }
 ?>
-<div class="modal-header">
-    <div class="modal-title modal-news-titre reference" id="myModalLabel" style="background-image: url(<?= News::PATH_IMG_NEWS. $news->get('picture')  ?>);">
-        <span><?= $news->get('title') ?></span>
+<div id="news-modal-content" class="modal-content news-modal-content" data-content>
+    <button class="hide-element" data-modal="close" data-target="news-modal">X</button>
+    <div class="modal-header">
+        <div class="modal-title modal-news-titre reference" id="myModalLabel" style="background-image: url(<?= News::PATH_IMG_NEWS. $news->get('picture')  ?>);">
+            <span><?= $news->get('title') ?></span>
+        </div>
     </div>
-</div>
-<div class="modal-body">
-    <button type="button" class="close close-news" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <?= html_entity_decode($news->get('content')) ?>
+    <div class="modal-body">
+        <?= html_entity_decode($news->get('content')) ?>
+    </div>
 </div>

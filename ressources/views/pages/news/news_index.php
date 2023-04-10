@@ -36,11 +36,7 @@ ob_start();
         </div>
         <?php if(!isset($_COOKIE['div_mail_news'])) { include views_path('pages/newsletter/parts/newsletter_form.php');} ?>
     </div>
-    <div class="modal fade" id="Modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-news" role="document">
-            <div class="modal-content" data-affiche="news"></div>
-        </div>
-    </div>
+    <div id="news-modal" class="modal news-modal-container" data-modal="close" data-target="news-modal"></div>
 
 <?php
 $content = ob_get_clean();
