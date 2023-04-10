@@ -3,7 +3,7 @@ use App\Core\Core_rbp;
 use App\Helpers\Auth;
 use App\Models\News;
 
-if(!isset($news)) { echo 'La variable news est inconnue'; return;}
+if(!isset($news)) { echo 'La variable news est inconnue'; return; }
 ?>
 <div class="col-md-6">
     <div class="news-affiche reference margin-updown" style="background: url(<?= News::PATH_IMG_REAL.$news->get('picture') ?>)" data-news="<?= $news->get('id') ?>">

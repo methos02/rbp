@@ -1,23 +1,13 @@
 <?php
+
 use App\Core\Request;
-use App\Core\Response;
+use App\Helpers\Auth;
 use App\Models\News;
 
+if(!isset($news_count, $news_list, )) { echo 'Une des variables "news_count" ou "news_list" est inconnue.'; return; }
+
 $meta['nom'] = 'Royal Brussels Poseidon - News';
-$newsFactory = News::factory();
 $form = Form::factoryForm();
-$message = "";
-
-$section_condition = !is_null(Request::get('section')) ? ['section_id' => Section::get('id', Request::get('section'))] : [];
-$news_list = News::where(array_merge(['status' => News::S_VALIDE], $section_condition))->paginate(News::PER_PAGE);
-$news_count = News::where(array_merge(['status' => News::S_VALIDE], $section_condition))->count();
-
-if(Request::isAjax()) {
-    return Response::json([
-        'news_list' => views_render('pages/news/parts/_news-list', compact('news_list')),
-        'paginator' => views_render('components/paginator', ['count' => $news_count, 'per_page' => News::PER_PAGE])
-    ]);
-}
 
 ob_start();
 ?>
@@ -28,7 +18,7 @@ ob_start();
                 <?php include_file(views_path('components/paginator'), ['count' => $news_count, 'per_page' => News::PER_PAGE]); ?>
             </div>
             <div class="btns-news-modif center-content">
-                <?php if($log['droit'] >= Droit::RESP): ?>
+                <?php if(Auth::is_log()): ?>
                     <a class="btn btn-default btn-primary btn-news-modif hidden-xs" href="/news_manage">Ajouter une news</a>
                     <a class="btn btn-default btn-primary btn-news-modif visible-xs-inline-block" href="news_manage.html"><span class="glyphicon glyphicon-pencil"></span></a>
                 <?php endif; ?>
@@ -37,14 +27,14 @@ ob_start();
                 <?= $form->select('section', 'Section souhaitée:', ['' => 'Toutes'] + Section::SLUG_TO_NAME, ['verif' => 0, 'default' => Request::get('section') ?? ''])?>
             </div>
         </div>
-        <?php if(!isset($_COOKIE['div_mail_news'])) { include('includes/form/mail_news_form.php');} ?>
+        <?php if(!isset($_COOKIE['div_mail_news'])) { include views_path('pages/newsletter/parts/newsletter_form.php');} ?>
         <div id="news_list" class="row" data-div="news">
             <?php include_file(views_path('pages/news/parts/_news-list'), compact('news_list')); ?>
         </div>
         <div class="news-pagination">
             <?php include_file(views_path('components/paginator'), ['count' => $news_count, 'per_page' => News::PER_PAGE]); ?>
         </div>
-        <?php if(isset($_COOKIE['div_mail_news'])) { include('includes/form/mail_news_form.php');} ?>
+        <?php if(!isset($_COOKIE['div_mail_news'])) { include views_path('pages/newsletter/parts/newsletter_form.php');} ?>
     </div>
     <div class="modal fade" id="Modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-news" role="document">

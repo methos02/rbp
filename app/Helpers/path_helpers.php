@@ -1,4 +1,7 @@
 <?php
+function controller_path($file = ""): string {
+    return project_path("\\app\\Controllers\\".$file);
+}
 function database_path($file = ""): string {
     return project_path("\\database\\".$file);
 }

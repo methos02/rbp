@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\News;
+if(!isset($news_list, )) { echo 'La variable news est inconnue'; return; }
 
 $meta['nom'] = 'Royal Brussels Poseidon - Accueil';
 
@@ -62,7 +62,7 @@ ob_start();
         <h2 class="row-pad">Dernières News</h2>
         <div class="affiche-news" data-div="news">
             <?php
-                foreach (News::limit(2)->get() as $news) :
+                foreach ($news_list as $news) :
                     include_file(views_path('pages/news/parts/_news-short'), compact('news'));
                 endforeach;
             ?>

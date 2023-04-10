@@ -7,13 +7,13 @@ use Exception;
 class Route
 {
     private string $path;
-    private string $template_name;
+    private string $controller_path;
     private array $params = [];
     private array $match_rules = [];
 
-    public function __construct($path, $template_name){
+    public function __construct($path, $controller_path){
         $this->path = trim($path, '/');  // On retire les / inutils
-        $this->template_name = $template_name;
+        $this->controller_path = $controller_path;
     }
 
     public function with($param, $regexp):self {
@@ -42,6 +42,6 @@ class Route
 
     /** @throws Exception */
     public function call(): void {
-        include_file(views_path($this->template_name));
+        include_file(controller_path(str_replace('.', '/', $this->controller_path) . '_controller'));
     }
 }
