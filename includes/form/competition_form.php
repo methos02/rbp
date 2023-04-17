@@ -1,4 +1,7 @@
 <?php
+
+use App\Core\Form;
+
 include_once __DIR__.'/../../includes/init.php';
 $competitionFactory = Competition::factory();
 $erreur = "";

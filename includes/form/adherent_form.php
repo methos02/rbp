@@ -1,4 +1,6 @@
-<?php include_once __DIR__.'/../init.php';
+<?php use App\Core\Form;
+
+include_once __DIR__.'/../init.php';
 $adherentFactory = Adherent::factory();
 $sectionFactoy = Section::factory();
 $adherent = "";

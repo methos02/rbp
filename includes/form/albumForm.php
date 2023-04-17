@@ -1,4 +1,7 @@
 <?php
+
+use App\Core\Form;
+
 if(!isset($formAlbum) || !$formAlbum instanceof Form) {
     echo Core_rbp::flashHTML('danger', "La variable form est invalide.") ;
 }

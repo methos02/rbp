@@ -11,6 +11,24 @@ class Request {
         return $_GET[$key] ?? null;
     }
 
+    public static function contains(string $string):bool {
+        return str_contains($_SERVER['REQUEST_URI'], $string);
+    }
+
+    public static function validate(string $request_path, string $redirect = null):array {
+        ($validator = new Validator($request_path))->validate();
+
+        if($validator->hasErrors() && self::isAjax()) { Response::json($validator->errors(), 422); die(); }
+
+        if($validator->hasErrors()) {
+            $_SESSION['errors'] = $validator->errors();
+            header('Location: '. (!is_null($redirect) ? $redirect : $_SERVER["HTTP_REFERER"] ));
+            die();
+        }
+
+        return $validator->validated();
+    }
+
     public static function isAjax():bool {
         return isset($_SERVER['HTTP_X_REQUESTED_WITH']);
     }

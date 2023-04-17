@@ -1,4 +1,6 @@
-<?php include __DIR__.'/includes/init.php';
+<?php use App\Core\Form;
+
+include __DIR__.'/includes/init.php';
 $sponsorFactory = Sponsor::factory();
 $message = "";
 $sponsor = "";

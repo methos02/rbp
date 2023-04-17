@@ -1,4 +1,5 @@
-<?php use App\Models\News;
+<?php use App\Core\Form;
+use App\Models\News;
 
 include('../includes/init.php');
 $newsFactory = News::factory();

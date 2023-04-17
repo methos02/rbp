@@ -20,11 +20,11 @@ class User extends Table {
     }
 
     public function getUserByMail($mail){
-        return $rep = $this -> bdd -> reqSingle('SELECT adh_id, adh_mail, adh_cle, adh_droit FROM t_adherent WHERE adh_mail=:mail',['mail'=> $mail]);
+        return $this->bdd->reqSingle('SELECT adh_id, adh_mail, adh_cle, adh_droit FROM t_adherent WHERE adh_mail=:mail',['mail'=> $mail]);
     }
 
     public function connectUser($mail, $mdp){
-        return $rep = $this -> bdd -> reqSingle('SELECT adh_mail, adh_cle, adh_droit FROM t_adherent WHERE adh_mail=:mail AND adh_mdp=:mdp',['mail'=> $mail, 'mdp' => $mdp]);
+        return $this->bdd->reqSingle('SELECT adh_mail, adh_cle, adh_droit FROM t_adherent WHERE adh_mail=:mail AND adh_mdp=:mdp',['mail'=> $mail, 'mdp' => $mdp]);
     }
 
     public function verifUser($mail){

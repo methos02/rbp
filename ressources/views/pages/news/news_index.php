@@ -1,5 +1,6 @@
 <?php
 
+use App\Core\Form;
 use App\Core\Request;
 use App\Helpers\Auth;
 use App\Models\News;

@@ -1,5 +1,7 @@
 <?php
+
 use App\Core\Core_rbp;
+use App\Core\Form;
 
 $params = include __DIR__.'/includes/init.php';
 $meta['nom'] = 'Royal Brussels Poseidon - Water-polo';

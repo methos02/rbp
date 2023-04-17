@@ -1,4 +1,6 @@
-<?php include __DIR__.'/../init.php';
+<?php use App\Core\Form;
+
+include __DIR__.'/../init.php';
 $adherentFactory = Adherent::factory();
 $message = "";
 

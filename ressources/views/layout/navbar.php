@@ -55,11 +55,11 @@ if (isset($_GET['action']) && $_GET['action'] == 'new_mdp') {
                 <li data-nav="contact"><a href="/contact">Nous contacter</a></li>
                 <?php
                 if(Auth::is_log()) {
-                    include includes_path('header/admin_menu.php');
+                    include_file(views_path('layout/parts/admin_menu'));
                 } elseif (isset($_GET['action']) && $_GET['action'] == 'new_mdp' && $flash == "") {
-                    include includes_path('header/form_mdp_modif.php');
+                    include_file(views_path('layout/parts/form_mdp_modif'));
                 } else{
-                    include includes_path('header/form_connection.php');
+                    include_file(views_path('layout/parts/_login-form'));
                 }
                 ?>
             </ul>

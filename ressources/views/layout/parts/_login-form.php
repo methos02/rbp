@@ -1,18 +1,22 @@
 <?php
-$visibility = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']))?' open' : '' ;
+
+use App\Core\Form;
+use App\Core\Request;
+use App\Helpers\Html;
+
 $form = Form::factoryForm();
 ?>
-<li class="dropdown<?php echo $visibility ?>" data-nav="gestion">
+<li class="dropdown<?= Html::add_if('open', Request::contains('login')) ?>" data-nav="gestion">
     <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
     <ul class="dropdown-menu menu-inscription" id="inscription">
         <li data-form="form_connexion">
             <ul>
                 <li>
-                    <form name="form-connection" class="navbar-form navbar-left" method="post" action="/t-connection">
-                        <strong> Connexion </strong>
+                    <form name="form-connection" class="navbar-form navbar-left" method="post" action="/login">
+                        <h3> Connexion </h3>
                         <div class="row-column">
-                            <?= $form->mail('mail', 'Adresse mail', ['obliger' => 1])?>
-                            <?= $form->mdp('mdp', 'Mot de passe', ['obliger' => 1])?>
+                            <?php Form::input_text('email', 'Adresse mail') ?>
+                            <?php Form::password('password', 'Mot de passe') ?>
                         </div>
                         <input type="submit" class="btn btn-default" value="Connecter" data-verif="form-connection">
                     </form>

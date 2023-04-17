@@ -1,4 +1,6 @@
-<?php include_once __DIR__.'/../init.php';
+<?php use App\Core\Form;
+
+include_once __DIR__.'/../init.php';
 $piscineFactory = Piscine::factory();
 $piscine = '';
 $result['message'] = "";

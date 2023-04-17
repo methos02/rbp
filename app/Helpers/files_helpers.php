@@ -1,6 +1,6 @@
 <?php
 
-function include_file(string $file_path, array $datas = []): void {
+function include_file(string $file_path, array $datas = []): void{
     try {
         if(!file_exists($file_path.'.php')) throw new Exception('File introuvable');
         extract($datas);

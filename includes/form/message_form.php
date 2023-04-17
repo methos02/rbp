@@ -1,4 +1,7 @@
 <?php
+
+use App\Core\Form;
+
 $mailFactory = Mail::factory();
 $contactForm = Form::factoryForm();
 ?>

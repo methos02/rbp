@@ -1,4 +1,6 @@
-<?php include __DIR__.'/../includes/init.php';
+<?php use App\Core\Form;
+
+include __DIR__.'/../includes/init.php';
 $factoryPhoto = Photo::factory();
 $saisonFactory = Saison::factory();
 $result['message'] = "";

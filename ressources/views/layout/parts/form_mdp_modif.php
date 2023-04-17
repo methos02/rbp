@@ -1,4 +1,7 @@
 <?php
+
+use App\Core\Form;
+
 $form = Form::factoryForm();
 ?>
 <li class="dropdown open" data-nav="gestion">
