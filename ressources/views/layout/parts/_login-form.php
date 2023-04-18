@@ -12,13 +12,13 @@ $form = Form::factoryForm();
         <li data-form="form_connexion">
             <ul>
                 <li>
-                    <form name="form-connection" class="navbar-form navbar-left" method="post" action="/login">
+                    <form id="login_form" class="navbar-form navbar-left" method="post" action="/login" data-validate="login_form">
                         <h3> Connexion </h3>
                         <div class="row-column">
                             <?php Form::input_text('email', 'Adresse mail') ?>
                             <?php Form::password('password', 'Mot de passe') ?>
                         </div>
-                        <input type="submit" class="btn btn-default" value="Connecter" data-verif="form-connection">
+                        <button type="submit" class="btn btn-default">Connection</button>
                     </form>
                 </li>
                 <li role="separator" class="divider"></li>

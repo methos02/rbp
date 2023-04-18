@@ -7,9 +7,7 @@ use App\Core\Orm\BuilderModel;
 class Model extends BuilderModel {
     protected static string $table = '';
     protected static string $prefix = '';
-    public static function factory():static {
-        return new static();
-    }
+    public static function factory():static { return new static(); }
 
     /** @noinspection PhpUnused */
     public static function make(array $datas):static {

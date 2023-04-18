@@ -1,0 +1,60 @@
+.loader {
+  width: 50px;
+  height: 20.8px;
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+  padding: 5px;
+  border-radius: 5px;
+  box-sizing: content-box;
+  margin: auto;
+}
+
+.loader-bars:before, .loader-bars:after, .loader-bars span {
+  content: '';
+  display: block;
+  width: 8px;
+  background-color: #FFF;
+  animation: grow 1.5s linear infinite;
+}
+
+.loader-bars.loader.mini {
+  width: auto;
+
+  &:before, &:after, & span { width: 4px; }
+}
+
+.loader-bars:before { left: 0; }
+.loader-bars:after { animation-delay: 0.5s; }
+.loader-bars span { animation-delay: 1s; }
+
+@keyframes grow {
+  0% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+
+  50% {
+    transform: scaleY(1);
+    opacity: 1.6;
+  }
+
+  100% {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+}
+
+.loader-background {  background-color: $primary; }
+
+.span-loader {
+  display: block;
+  width: 21px;
+  height: 21px;
+  margin: 0 5px 1px 4px;
+  padding: 2px 3px;
+  background-color: $gray;
+  border-radius: 2px;
+
+  img { width: 15px;}
+}

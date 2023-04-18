@@ -1,10 +1,13 @@
 <?php
 
 use App\Models\News;
+use App\Models\User;
 use Carbon\Carbon;
 
 $faker = Faker\Factory::create();
 $news_count = 50;
+
+$users = User::all();
 
 for($i = 0; $i < $news_count; $i++) {
     $section_id = $faker->numberBetween(1,4);
@@ -12,7 +15,7 @@ for($i = 0; $i < $news_count; $i++) {
         'title' => 'news '. $i,
         'content' => $faker->text(),
         'picture' => News::getDefaultImage($section_id),
-        'created_by' => $faker->randomElement(['ISTIRY Anne', 'LEON Frédéric']),
+        'created_by' => ($faker->randomElement($users))->getFullName(),
         'created_at' => Carbon::now()->subDays($news_count - $i)->format('d-m-y'),
         'section_id' => $section_id,
     ];

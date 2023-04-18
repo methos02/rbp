@@ -12,7 +12,7 @@ function inputs_path($file = ""): string {
     return views_path("layout\\inputs\\".$file);
 }
 function project_path($file = ""):string {
-    return (!is_null($_SERVER['REQUEST_METHOD'])? dirname(getcwd()) : getcwd()).$file;
+    return (isset($_SERVER['REQUEST_METHOD'])? dirname(getcwd()) : getcwd()).$file;
 }
 function request_path($file = ""): string {
     return project_path("\\app\\FormRequest\\".$file);
