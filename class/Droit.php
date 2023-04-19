@@ -25,18 +25,4 @@ class Droit extends Table {
     public static function factory(): Droit {
         return new Droit(Connection::getInstance());
     }
-
-    public function getLog():void{
-        if(!isset($_SESSION['auth']['mail'], $_SESSION['auth']['cle'])) return;
-
-        $user = $this->bdd->reqSingle('SELECT adh_id, adh_nom, adh_prenom, adh_section, adh_droit FROM t_adherent WHERE adh_mail=:mail AND adh_cle=:cle', ['mail' => $_SESSION['auth']['mail'], 'cle' => $_SESSION['auth']['cle']]);
-        if(empty($user)) return;
-
-        $_SESSION['auth'] = [
-            'user' => $user['adh_nom'] . ' ' . $user['adh_prenom'],
-            'ID' => $user['adh_id'],
-            'section' => $user['adh_section'],
-            'droit' => $user['adh_droit'],
-        ];
-    }
 }

@@ -14,6 +14,7 @@ $form = Form::factoryForm();
                 <li>
                     <form id="login_form" class="navbar-form navbar-left" method="post" action="/login" data-validate="login_form">
                         <h3> Connexion </h3>
+                        <?= Html::error('login'); ?>
                         <div class="row-column">
                             <?php Form::input_text('email', 'Adresse mail') ?>
                             <?php Form::password('password', 'Mot de passe') ?>

@@ -1,5 +1,5 @@
 <?php
-use App\Helpers\Auth;
+use App\Core\Auth;
 ?>
 <!DOCTYPE html>
 <html lang="fr">

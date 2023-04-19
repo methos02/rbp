@@ -11,10 +11,8 @@ class BuilderModel {
         return (new Builder(static::$table, static::class))->limit($limit);
     }
     public static function find(int $id):?static {
-        $model_datas = (new Builder(static::$table, static::class))->where(['id' => $id])->first();
-        return $model_datas ? call_user_func_array(static::class . '::make', ['datas' => $model_datas]) : null;
+        return (new Builder(static::$table, static::class))->where(['id' => $id])->first();
     }
-
     public static function all():array {
         return (new Builder(static::$table, static::class))->get();
     }

@@ -1,6 +1,6 @@
 <?php
 //Include config file
-use App\Core\Connection;
+use App\Core\Auth;
 use App\Core\Core_rbp;
 
 include __DIR__.'/conf.php';
@@ -35,9 +35,7 @@ if((!defined('script_name') ||  !str_contains(script_name, 'command'))  && !isse
 
 $params = [];
 
-if(!defined('script_name') || !str_contains(script_name, 'command')) {
-    Droit::factory()->getLog();
-}
+Auth::log_user();
 
 $params['meta'] = [];
 return $params;

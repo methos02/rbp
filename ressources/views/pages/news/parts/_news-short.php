@@ -1,6 +1,6 @@
 <?php
 use App\Core\Core_rbp;
-use App\Helpers\Auth;
+use App\Core\Auth;
 use App\Models\News;
 
 if(!isset($news)) { echo 'La variable news est inconnue'; return; }

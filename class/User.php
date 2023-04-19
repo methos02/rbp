@@ -23,10 +23,6 @@ class User extends Table {
         return $this->bdd->reqSingle('SELECT adh_id, adh_mail, adh_cle, adh_droit FROM t_adherent WHERE adh_mail=:mail',['mail'=> $mail]);
     }
 
-    public function connectUser($mail, $mdp){
-        return $this->bdd->reqSingle('SELECT adh_mail, adh_cle, adh_droit FROM t_adherent WHERE adh_mail=:mail AND adh_mdp=:mdp',['mail'=> $mail, 'mdp' => $mdp]);
-    }
-
     public function verifUser($mail){
         return $this->bdd ->reqSingle("SELECT adh_cle as cle, adh_id as id_user, adh_droit FROM t_adherent WHERE adh_mail=:adh_mail", ['adh_mail'=>$mail]);
     }

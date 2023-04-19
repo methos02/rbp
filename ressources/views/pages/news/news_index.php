@@ -2,7 +2,7 @@
 
 use App\Core\Form;
 use App\Core\Request;
-use App\Helpers\Auth;
+use App\Core\Auth;
 use App\Models\News;
 
 if(!isset($news_count, $news_list, )) { echo 'Une des variables "news_count" ou "news_list" est inconnue.'; return; }

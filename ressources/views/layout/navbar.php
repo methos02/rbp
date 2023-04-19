@@ -1,7 +1,7 @@
 <?php
 
 use App\Core\Core_rbp;
-use App\Helpers\Auth;
+use App\Core\Auth;
 
 $flash = '';
 

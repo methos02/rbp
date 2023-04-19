@@ -4,6 +4,7 @@ namespace App\Core\Orm;
 
 use App\Core\Connection;
 use App\Core\Request;
+use App\Models\Model;
 use PDO;
 
 class Builder {
@@ -60,10 +61,11 @@ class Builder {
         return array_map(fn($model_datas) => call_user_func_array($this->model . '::make', ['datas' => $model_datas]), $models_datas);
     }
 
-    public function first():bool|array {
+    public function first():?Model {
         $statement = self::getInstance()->prepare($this->generateSelect());
         $statement->execute($this->where);
-        return $statement->fetch(PDO::FETCH_ASSOC);
+        $model_datas = $statement->fetch(PDO::FETCH_ASSOC);
+        return  $model_datas ? call_user_func_array($this->model . '::make', ['datas' => $model_datas]) : null;
     }
 
     public function count():int {

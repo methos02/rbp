@@ -1,3 +1,5 @@
 /vendor/
 /documents/competition/*
 !/documents/competition/.gitkeep
+/node_modules
+/.idea

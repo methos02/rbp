@@ -1,27 +1,17 @@
 <?php
 use App\Core\Request;
+use App\Core\Response;
+use App\Models\User;
 
 $datas = Request::validate('auth/login_request', '/login');
 
-$factoryUser = User::factory();
-$Utils = Utils::factory();
+$user = User::where(['email' => $datas['email']])->first();
 
-$user = $factoryUser->connectUser($_POST['mail'], sha1 ( 'az' .$_POST['mdp']));
+if(empty($user)) Response::redirectWithError('/login', ['login' => 'Adresse mail ou mot de passe invalide.']);
+if(!password_verify($datas['password'], $user->get('password'))) Response::redirectWithError('/login', ['login' => 'Adresse mail ou mot de passe invalide.']);
 
-if(empty($user)){
-    $_SESSION['flash'] = Core_rbp::flash('danger','Aucun compte trouvé.','Adresse mail ou mot de passe invalide.');
-}
-
-if(!isset($_SESSION['flash']) && $user['adh_droit'] == 0) {
-    $_SESSION['flash'] = Core_rbp::flash('danger',"Connexion refusée.", "Vous n'avez pas les droits pour vous connecter.");
-}
-
-if(!isset($_SESSION['flash'])){
-    $_SESSION['auth']['cle'] = $user['adh_cle'];
-    $_SESSION['auth']['mail'] = $user['adh_mail'];
-
-    unset($_SESSION['connect']);
-    $_SESSION['flash'] = Core_rbp::flash('success','Vous êtes bien connecté.');
-}
+$_SESSION['auth']['token'] = $user->get('token');
+$_SESSION['auth']['email'] = $user->get('email');
+$_SESSION['flash'] = ['type' => 'success', 'title' => 'Vous êtes bien connecté.'];
 
 header('Location: '.$_SERVER["HTTP_REFERER"] );
