@@ -9,6 +9,8 @@ return '
     ALTER TABLE t_adherent RENAME COLUMN adh_mdp TO password;
     ALTER TABLE t_adherent RENAME COLUMN adh_section TO section_id;
     ALTER TABLE t_adherent RENAME COLUMN adh_droit TO roles;
+    ALTER TABLE t_adherent RENAME COLUMN adh_inscrit TO created_at;
+    ALTER TABLE t_adherent RENAME COLUMN adh_date_modif TO updated_at;
 
     ALTER TABLE t_adherent DROP COLUMN adh_birth;
     ALTER TABLE t_adherent DROP COLUMN adh_civilite;
@@ -28,14 +30,14 @@ return '
     ALTER TABLE t_adherent DROP COLUMN adh_mail_mere;    
     ALTER TABLE t_adherent DROP COLUMN adh_gsm_pere;
     ALTER TABLE t_adherent DROP COLUMN adh_gsm_mere;
-    ALTER TABLE t_adherent DROP COLUMN adh_inscrit;
     ALTER TABLE t_adherent DROP COLUMN adh_preinscrit;
     ALTER TABLE t_adherent DROP COLUMN adh_date_in;
     ALTER TABLE t_adherent DROP COLUMN adh_supplogiq;
     ALTER TABLE t_adherent DROP COLUMN adh_nom_modif;
-    ALTER TABLE t_adherent DROP COLUMN adh_date_modif;
 
     ALTER TABLE t_adherent MODIFY roles CHAR(10);
+    ALTER TABLE t_adherent MODIFY created_at DATE AFTER password;
+    ALTER TABLE t_adherent MODIFY updated_at DATE;
 
     ALTER TABLE t_adherent RENAME users;
 ';

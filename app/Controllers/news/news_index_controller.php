@@ -5,7 +5,7 @@ use App\Core\Response;
 use App\Models\News;
 
 $section_condition = !is_null(Request::get('section')) ? ['section_id' => Section::get('id', Request::get('section'))] : [];
-$news_list = News::where(array_merge(['status' => News::S_VALIDE], $section_condition))->paginate(News::PER_PAGE);
+$news_list = News::where(array_merge(['status' => News::S_VALIDE], $section_condition))->order('created_at', 'DESC')->paginate(News::PER_PAGE);
 $news_count = News::where(array_merge(['status' => News::S_VALIDE], $section_condition))->count();
 
 if(Request::isAjax()) {

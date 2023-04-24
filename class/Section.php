@@ -3,12 +3,11 @@
 use App\Core\Connection;
 
 class Section extends Table{
+    const SECTIONS = [ self::NATATION['id'] => self::NATATION, self::WATERPOLO['id'] => self::WATERPOLO, self::PLONGEON['id'] => self::PLONGEON, self::COMITE['id'] => self::COMITE,];
     const NATATION = ['id' => 1,'nom' => 'Natation', 'slug' => 'natation'];
     const WATERPOLO = ['id' => 2,'nom' => 'Water-polo', 'slug' => 'waterpolo'];
     const PLONGEON = ['id' => 3,'nom' => 'Plongeon', 'slug' => 'plongeon'];
     const COMITE = ['id' => 4,'nom' => 'Comité', 'slug' => 'comite'];
-
-    const SECTIONS_ID = [1,2,3,4];
 
     const BTN_COLOR = [
         self::WATERPOLO['id'] => 'btn-success',
@@ -60,6 +59,12 @@ class Section extends Table{
 
     public static function get($prop, $section_slug) {
         return self::GET_SECTIONS[$section_slug][$prop] ?? null;
+    }
+
+    public static function select_options():array {
+        $options = [];
+        foreach (self::GET_SECTIONS as $section) { $options[$section['id']] = $section['nom']; }
+        return $options;
     }
 
     public static function factory():self {

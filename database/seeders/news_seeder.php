@@ -16,7 +16,7 @@ for($i = 0; $i < $news_count; $i++) {
         'content' => $faker->text(),
         'picture' => News::getDefaultImage($section_id),
         'created_by' => ($faker->randomElement($users))->getFullName(),
-        'created_at' => Carbon::now()->subDays($news_count - $i)->format('d-m-y'),
+        'created_at' => Carbon::now()->subDays($news_count - $i)->format('Y-m-d'),
         'section_id' => $section_id,
     ];
 

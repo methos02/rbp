@@ -1,0 +1,24 @@
+.container-news_index {
+  .header {
+    display: flex;
+    align-items: center;
+
+    > * { min-width: 315px;}
+
+    &-title { margin: auto; }
+    &-paginator { flex: 1; }
+    &-actions {
+      display: flex;
+      justify-content: flex-end;
+
+      a {
+        margin-right: 10px;
+        height: 44px;
+        line-height: 40px;
+        padding: 0 15px;
+      }
+
+      label { margin: 0;}
+    }
+  }
+}

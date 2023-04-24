@@ -19,6 +19,8 @@ class Validator {
             $rules = explode('|', $rules_field);
 
             foreach ($rules as $rule) {
+                if($rule == "sometimes" && (!isset($_POST[$input_name]) || $_POST[$input_name] === "" )) break;
+
                 $class_name = 'App\Core\Rules\\' . ucfirst($rule) . 'Rule';
                 /** @var RuleInterface $rule_class */
                 $rule_class = new $class_name($input_name);

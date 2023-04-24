@@ -28,14 +28,20 @@ class Form
     private $data;
 
     public static function input_text($name, $label, $options = []): void {
-        include_file(inputs_path('text'), compact('name', 'label', 'options'));
+        include_file(inputs_path('_text'), compact('name', 'label', 'options'));
+    }
+    public static function input_select($name, $label, $options, $params = []): void {
+        include_file(inputs_path('_select'), compact('name', 'label', 'options', 'params'));
     }
     public static function password($name, $label, $options = []): void {
-        include_file(inputs_path('password'), compact('name', 'label', 'options'));
+        include_file(inputs_path('_password'), compact('name', 'label', 'options'));
+    }
+    public static function file_image($name, $options = []): void {
+        $options['src'] = $options['src'] ?? Form::DEFAUT_IMG;
+        include_file(inputs_path('_file-image'), compact('name', 'options'));
     }
 
-    public function __construct($data = null)
-    {
+    public function __construct($data = null) {
         $this->data = $data;
     }
 

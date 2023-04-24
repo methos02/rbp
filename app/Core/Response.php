@@ -16,11 +16,11 @@ class Response {
         header('Location: '. $url );
         die();
     }
-    public static function redirectWithError(string $url, array $error):void {
+    #[NoReturn] public static function redirectWithError(string $url, array $error):void {
         $_SESSION['errors'] = $error;
         self::redirect($url);
     }
-    public static function redirectWithFlash(string $url, array $flash):void {
+    #[NoReturn] public static function redirectWithFlash(string $url, array $flash):void {
         $_SESSION['flash'] = $flash;
         self::redirect($url);
     }

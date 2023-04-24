@@ -29,6 +29,6 @@ class Model extends BuilderModel {
     }
     public function get(string $property):?string {
         $property_name = static::$prefix . $property;
-        return $this->has($property_name)? $this->$property_name : null;
+        return $this->has($property_name)? htmlspecialchars($this->$property_name) : null;
     }
 }

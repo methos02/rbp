@@ -1,6 +1,7 @@
 import {throwError} from "../utils/error";
-import {validateLoginForm} from "./login_form";
 import {insertError} from "../utils/form";
+import {validateLoginForm} from "./login_form";
+import {validateNewsForm} from "./news_form";
 
 export function validateForm(rules, formDatas) {
     let value;
@@ -78,7 +79,8 @@ function defaultRules(rule_name) {
 
 function defaultTests(test_name) {
     const tests = {
-        required : (value) => value === "",
+        required : value => value === "",
+        int: value => Number.isInteger(value)
     }
 
     return tests[test_name];
@@ -101,4 +103,5 @@ export function validateSubmitForm(form, e) {
 
 const form_validator = {
     login_form : validateLoginForm,
+    news_form : validateNewsForm,
 };

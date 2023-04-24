@@ -2,6 +2,8 @@
 
 namespace App\Core\Orm;
 
+use Carbon\Carbon;
+
 class BuilderModel {
     protected static string $table = '';
     public static function where(array $conditions):Builder {
@@ -27,6 +29,8 @@ class BuilderModel {
             $setter = 'set' . ucfirst($property);
             if(method_exists($model,$setter)) $datas[$property] = $model->$setter($datas[$property])->get($property);
         }
+
+        if(!isset($datas['created_at'])) $datas['created_at'] = Carbon::now()->format('Y-m-d');
 
         if(method_exists($model, 'default_properties')) { $datas = array_merge($datas, $model->default_properties()); }
         return (new Builder(static::$table, static::class))->create($datas);

@@ -2,6 +2,7 @@
 
 namespace App\Core\Rules;
 
+/** @noinspection PhpUnused */
 class RequiredRule extends BaseRule {
     public function check():bool {
         return isset($_POST[$this->input_name]) && $_POST[$this->input_name] != "";

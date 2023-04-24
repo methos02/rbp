@@ -27,5 +27,8 @@ class Auth {
     public static function is_admin():bool {
         return self::$user->get('roles') == 'admin';
     }
+    public static function user():User {
+        return self::$user;
+    }
 
 }

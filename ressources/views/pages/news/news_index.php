@@ -12,22 +12,19 @@ $form = Form::factoryForm();
 
 ob_start();
 ?>
-    <div id="container_news_list" class="container reference">
-        <div class="nav-news-secondaire">
-            <h2 class="news-title">News</h2>
-            <div class="news-pagination">
+    <div id="container_news_list" class="container container-news_index">
+        <nav class="header">
+            <h2 class="header-title">News</h2>
+            <div class="header-paginator">
                 <?php include_file(views_path('components/paginator'), ['count' => $news_count, 'per_page' => News::PER_PAGE]); ?>
             </div>
-            <div class="btns-news-modif center-content">
+            <div class="header-actions">
                 <?php if(Auth::is_log()): ?>
-                    <a class="btn btn-default btn-primary btn-news-modif hidden-xs" href="/news_manage">Ajouter une news</a>
-                    <a class="btn btn-default btn-primary btn-news-modif visible-xs-inline-block" href="news_manage.html"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a class="btn btn-default btn-primary" href="/news/create">Ajouter une news</a>
                 <?php endif; ?>
-            </div>
-            <div class="center-content news-section reference form-inline">
                 <?= $form->select('section', 'Section souhaitée:', ['' => 'Toutes'] + Section::SLUG_TO_NAME, ['verif' => 0, 'default' => Request::get('section') ?? ''])?>
             </div>
-        </div>
+        </nav>
         <?php if(!isset($_COOKIE['div_mail_news'])) { include views_path('pages/newsletter/parts/newsletter_form.php');} ?>
         <div id="news_list" class="row" data-div="news">
             <?php include_file(views_path('pages/news/parts/_news-list'), compact('news_list')); ?>

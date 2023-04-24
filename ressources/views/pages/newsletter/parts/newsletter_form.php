@@ -3,9 +3,9 @@
         <div class="row">
             <div class="col-sm-11 col-md-10 col-md-offset-1 reference">
                 <label for="news_mail">S'inscrire pour être prévenu des nouvelles news</label>
-                <?php if (!isset($_COOKIE['div_mail_news'])) { ?>
+                <?php if (!isset($_COOKIE['div_mail_news'])): ?>
                     <a href="" class="message-close div-mail-close" data-action="close-news-mail"><span class="glyphicon glyphicon-remove" ></span></a>
-                <?php } ?>
+                <?php endif; ?>
             </div>
         </div>
         <div class="row">

@@ -8,7 +8,9 @@ $datas = Request::validate('auth/login_request', '/login');
 $user = User::where(['email' => $datas['email']])->first();
 
 if(empty($user)) Response::redirectWithError('/login', ['login' => 'Adresse mail ou mot de passe invalide.']);
-if(!password_verify($datas['password'], $user->get('password'))) Response::redirectWithError('/login', ['login' => 'Adresse mail ou mot de passe invalide.']);
+if(!password_verify($datas['password'], $user->get('password'))) {
+    if($user->get('password') !== sha1 ( 'az'. $datas['password'])) Response::redirectWithError('/login', ['login' => 'Adresse mail ou mot de passe invalide.']);
+}
 
 $_SESSION['auth']['token'] = $user->get('token');
 $_SESSION['auth']['email'] = $user->get('email');
